@@ -91,7 +91,8 @@
                   </v-card-title>
                   <v-card-text
                     class="text-center"
-                  >Ryujinx is capable of booting past menus to in-game on over 1,000 commercial titles, roughly half of which are considered playable.</v-card-text>
+                  >Ryujinx is capable of booting past menus to in-game on over 1,500 commercial titles, with over half being considered playable. See the full
+                  list of compatible titles <router-link to="https://github.com/Ryujinx/Ryujinx-Games-List">here</router-link>.</v-card-text>
                 </v-card>
               </v-col>
             </v-row>
@@ -125,7 +126,7 @@
                     <div class="display-1 text-center">Discord</div>
                   </v-card-title>
                   <v-card-text class="text-center">
-                    Join the Ryujinx Discord server; you can get help,
+                    Join the <router-link to="https://discord.gg/VkQYXAZ">Ryujinx Discord server</router-link>! You can get help,
                     as well as converse with fellow users and developers.
                   </v-card-text>
                 </v-card>
