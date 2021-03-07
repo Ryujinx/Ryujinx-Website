@@ -6,6 +6,7 @@
                 class="mx-2"
                 dark
                 :color="`ryu_${color}`"
+                :disabled="disabled"
                 target="_blank"
                 rel="noopener"
                 :loading="loading"
@@ -27,7 +28,8 @@ export default {
         loading: Boolean,
         href: String,
         version: String,
-        click: Function
+        click: Function,
+        disabled: Boolean
     }
 }
 </script>

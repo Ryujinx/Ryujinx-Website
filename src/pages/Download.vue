@@ -37,6 +37,7 @@
                           color="orange"
                           platform="windows"
                           :version="version"
+                          disabled="false"
                           :href="`${downloadURL}-win_x64.zip`"
                           :click="trackDownload"
                           :loading="isLoading"
@@ -45,6 +46,7 @@
                         <DownloadButton
                           color="orange"
                           platform="linux"
+                          disabled="false"
                           :version="version"
                           :href="`${downloadURL}-linux_x64.tar.gz`"
                           :click="trackDownload"
@@ -54,7 +56,8 @@
                         <DownloadButton
                           color="orange"
                           platform="apple"
-                          :version="version"
+                          disabled="true"
+                          :version="Coming soon"
                           :href="`${downloadURL}-osx_x64.zip`"
                           :click="trackDownload"
                           :loading="isLoading"
