@@ -91,7 +91,7 @@
                   </v-card-title>
                   <v-card-text
                     class="text-center"
-                  >As of January 2021, Ryujinx has been tested on over 3,000 commercial titles: ~2,300 boot past menus and into gameplay, with approximately 1,500 of those being considered playable. See the compatibility list <a href="https://github.com/Ryujinx/Ryujinx-Games-List" rel="noopener" target="_blank">here</a>.</v-card-text>
+                  >As of March 2021, Ryujinx has been tested on over 3,200 commercial titles: ~2,700 boot past menus and into gameplay, with approximately 1,900 of those being considered playable. See the compatibility list <a href="https://github.com/Ryujinx/Ryujinx-Games-List" rel="noopener" target="_blank">here</a>.</v-card-text>
                 </v-card>
               </v-col>
             </v-row>
