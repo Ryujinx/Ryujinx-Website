@@ -7,7 +7,7 @@
             <v-row align="start" justify="center">
               <v-col cols="12" md="6">
                 <div class="text-center">
-                  <p class="display-1">Building Ryujinx and latest downloads</p>
+                  <p class="text-h4">Building Ryujinx and latest downloads</p>
                   <v-container>
                     <v-row align="start" justify="center">
                       <v-img :max-height="300" :max-width="500" position="text-center" src="/public/shell.png" alt="Shell" />
@@ -63,6 +63,16 @@
                       <v-col>
                         <p class="text-h5">Looking for the LDN build?</p>
                         <p class="text">Head over to our <a href="https://www.patreon.com/posts/introducing-ldn2-45268370" rel="noopener" target="_blank">Patreon</a> for more info & FREE download</p>
+                      </v-col>
+                    </v-row>
+                    <v-row justify="center">
+                      <v-col>
+                        <p class="text-h5">Need help?</p>
+                        <p class="text">
+                          Check out the <a href="https://github.com/Ryujinx/Ryujinx/wiki/Ryujinx-Setup-&-Configuration-Guide" rel="noopener" target="_blank">Setup Guide,</a>
+                          read the <a href="https://github.com/Ryujinx/Ryujinx/wiki/Frequently-Asked-Questions" rel="noopener" target="_blank">FAQ</a>
+                          or head to our <a href="https://discord.gg/VkQYXAZ" rel="noopener" target="_blank">Discord!</a>
+                        </p>
                       </v-col>
                     </v-row>
                     <v-row justify="center">

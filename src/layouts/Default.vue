@@ -22,6 +22,12 @@
         <v-btn text exact to="/contribute">
           <v-icon>fas fa-code</v-icon>
         </v-btn>
+        <v-btn text href="https://github.com/Ryujinx/Ryujinx/wiki/Ryujinx-Setup-&-Configuration-Guide">
+          <v-icon>fas fa-info-circle</v-icon>
+        </v-btn>
+        <v-btn text href="https://github.com/Ryujinx/Ryujinx/wiki/Frequently-Asked-Questions">
+          <v-icon>fas fa-question-circle</v-icon>
+        </v-btn>
         <v-btn
           text
           exact
@@ -41,6 +47,20 @@
         <v-btn text href="https://blog.ryujinx.org/">Blog</v-btn>
         <v-btn text exact to="/download">Download</v-btn>
         <v-btn text exact to="/contribute">Contribute</v-btn>
+        <v-btn 
+          text 
+          exact 
+          href="https://github.com/Ryujinx/Ryujinx/wiki/Ryujinx-Setup-&-Configuration-Guide" 
+          rel="noopener" 
+          target="_blank"
+        >Guide</v-btn>
+        <v-btn 
+          text 
+          exact 
+          href="https://github.com/Ryujinx/Ryujinx/wiki/Frequently-Asked-Questions" 
+          rel="noopener" 
+          target="_blank"
+        >FAQ</v-btn>
         <v-btn
           text
           exact
@@ -95,6 +115,31 @@
             <v-icon>fas fa-code</v-icon>
           </v-list-item-action>
           <v-list-item-title>Contribute</v-list-item-title>
+        </v-list-item>
+
+        <!-- Setup Guide -->
+        <v-list-item 
+          exact 
+          href="https://github.com/Ryujinx/Ryujinx/wiki/Ryujinx-Setup-&-Configuration-Guide"
+          rel="noopener"
+          target="_blank"
+        >
+          <v-list-item-action>
+            <v-icon>fas fa-info-circle</v-icon>
+          </v-list-item-action>
+          <v-list-item-title>Guide</v-list-item-title>
+        </v-list-item>
+
+        <!-- FAQ -->
+        <v-list-item
+          exact
+          href="https://github.com/Ryujinx/Ryujinx/wiki/Frequently-Asked-Questions"
+          rel="noopener"
+          target="_blank">
+          <v-list-item-action>
+            <v-icon>fas fa-question-circle</v-icon>
+          </v-list-item-action>
+          <v-list-item-title>FAQ</v-list-item-title>
         </v-list-item>
 
         <!-- Game Compatibility -->
