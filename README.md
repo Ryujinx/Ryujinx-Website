@@ -1,24 +1,19 @@
-# Ryujinx Website
+# Ryujinx website
 
-### 1. Install Gridsome CLI tool if you don't have
+## Project setup
 
-`npm install --global @gridsome/cli`
-
-## 2. Build Setup
-
-``` bash
-# Workaround (see https://github.com/gridsome/gridsome/issues/1385)
-export VUE_CLI_BABEL_TRANSPILE_MODULES=true
-
-# install dependencies
+```
 npm install
+```
 
-# serve with hot reload at localhost:8080
-npm run develop
+### Compiles and hot-reloads for development
 
-# build for production with minification
+```
+npm run dev
+```
+
+### Compiles and minifies for production
+
+```
 npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
