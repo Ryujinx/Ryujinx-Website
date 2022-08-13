@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import BaseNavigation from "@/common/components/navigations/BaseNavigation.vue";
-
+import SocialIconList from "@/modules/SocialIconList.vue";
 import { navigations } from "@/common/constants/navigation";
 </script>
 
@@ -18,6 +18,10 @@ import { navigations } from "@/common/constants/navigation";
           </div>
           <div class="flex flex-col text-center md:flex-row md:items-center md:justify-between space-y-6 md:space-y-0 md:space-x-10">
             <BaseNavigation :navigations="navigations" />
+
+            <div class="flex items-center justify-center space-x-3">
+              <SocialIconList />
+            </div>
           </div>
         </div>
       </header>
