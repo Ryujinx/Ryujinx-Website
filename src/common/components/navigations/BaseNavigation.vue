@@ -11,18 +11,11 @@ defineProps({
     type: String,
     default: "space-x-4 md:space-x-6",
   },
-  activeClass: {
+  linkClass: {
     type: String,
-    default: "text-blue-600 bg-blue-50",
-  },
-});
-
-const getComponent = (node: NavigationNode) => {
-  if (node.to) {
-    return { component: "RouterLink", props: { to: { name: node.to } } };
+    default: "font-semibold text-gray-300 hover:text-white",
   }
-  return { component: "a", props: { href: node.href } };
-};
+});
 </script>
 
 <template>
@@ -31,14 +24,18 @@ const getComponent = (node: NavigationNode) => {
       v-for="(node, nodeIndex) in navigations"
       :key="`part-${nodeIndex}`"
     >
-      <component
-        :is="getComponent(node).component"
-        v-bind="{...getComponent(node).props}"
-        class="font-semibold text-gray-300 hover:text-gray-400"
-        :active-class="activeClass"
+      <RouterLink
+        v-if="node.to"
+        v-slot="{ isActive }"
+        :to="{ name: node.to }"
+        :class="linkClass"
       >
+        <span :class="{ 'text-white': isActive }">{{ node.name }}</span>
+      </RouterLink>
+
+      <a v-else :href="node.href" :class="linkClass">
         <span>{{ node.name }}</span>
-      </component>
+      </a>
     </template>
   </nav>
 </template>
