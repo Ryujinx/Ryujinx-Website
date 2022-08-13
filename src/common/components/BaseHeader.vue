@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import BaseNavigation from "@/common/components/navigations/BaseNavigation.vue";
+
+import { navigations } from "@/common/constants/navigation";
 </script>
 
 <template>
@@ -8,29 +11,13 @@
       <header id="page-header" class="flex flex-none items-center py-10">
         <div class="flex flex-col text-center md:flex-row md:items-center md:justify-between space-y-6 md:space-y-0 container xl:max-w-7xl mx-auto px-4 lg:px-10">
           <div>
-            <a href="javascript:void(0)" class="inline-flex items-center space-x-2 font-bold text-lg tracking-wide text-white hover:opacity-75">
+            <RouterLink :to="{name: 'home'}" class="inline-flex items-center space-x-2 font-bold text-lg tracking-wide text-white hover:opacity-75">
               <img src="assets/images/logo.png" class="text-indigo-300 opacity-75 hi-outline hi-cube-transparent inline-block w-6 h-6" alt="logo">
               <span>Ryujinx</span>
-            </a>
+            </RouterLink>
           </div>
           <div class="flex flex-col text-center md:flex-row md:items-center md:justify-between space-y-6 md:space-y-0 md:space-x-10">
-            <nav class="space-x-4 md:space-x-6">
-              <a href="javascript:void(0)" class="font-semibold text-gray-300 hover:text-gray-400">
-                <span>Blog</span>
-              </a>
-              <a href="javascript:void(0)" class="font-semibold text-gray-300 hover:text-gray-400">
-                <span>Download</span>
-              </a>
-              <a href="javascript:void(0)" class="font-semibold text-gray-300 hover:text-gray-400">
-                <span>Guide</span>
-              </a>
-              <a href="javascript:void(0)" class="font-semibold text-gray-300 hover:text-gray-400">
-                <span>FAQ</span>
-              </a>
-              <a href="javascript:void(0)" class="font-semibold text-gray-300 hover:text-gray-400">
-                <span>Compatibility</span>
-              </a>
-            </nav>
+            <BaseNavigation :navigations="navigations" />
           </div>
         </div>
       </header>
