@@ -2,6 +2,7 @@
 import { useRouter } from "vue-router";
 
 import BaseHeader from "@/common/components/BaseHeader.vue";
+import BaseFooter from "@/common/components/BaseFooter.vue";
 
 const { currentRoute } = useRouter();
 </script>
@@ -23,6 +24,8 @@ const { currentRoute } = useRouter();
           </transition>
         </router-view>
       </div>
+
+      <BaseFooter />
     </main>
   </div>
 </template>
