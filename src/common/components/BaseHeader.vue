@@ -24,7 +24,7 @@ import { navigations } from "@/common/constants/navigation";
 
       <div class="text-center container xl:max-w-7xl mx-auto px-4 py-16 lg:px-8 lg:py-32">
         <h1 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">
-          A simple, experimental <span class="text-red-500">Nintendo Switch</span> emulator.
+          A simple, experimental <span class="text-red-500">Nintendo Switch</span> emulator
         </h1>
         <h2 class="text-lg md:text-xl md:leading-relaxed font-medium text-gray-400 lg:w-2/3 mx-auto">
           Ryujinx is an open-source Nintendo Switch emulator created by <span class="text-red-50">gdkchan</span> and written in C#.
