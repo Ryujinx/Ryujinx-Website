@@ -1,38 +1,30 @@
 {
-  "name": "ryujinx_website",
-  "version": "2.0.0",
-  "description": "Ryujinx Website",
-  "private": true,
+  "name": "ryujinx-website",
+  "version": "3.0.0",
   "scripts": {
-    "build": "npx gridsome build",
-    "develop": "npx gridsome develop",
-    "explore": "npx gridsome explore",
-    "deploy": "npm run build && npx purgecss --config purgecss.config.js --output dist/assets/css/ && npx babel -d dist dist"
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.12.1",
-    "@gridsome/plugin-google-analytics": "^0.1.2",
-    "core-js": "^3.8.3",
-    "gridsome": "^0.7.23",
-    "vuetify": "2.3.3"
+    "vue": "^3.2.37"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.10",
-    "@babel/preset-env": "^7.12.11",
-    "@gridsome/cli": "^0.3.4",
-    "@gridsome/plugin-sitemap": "^0.4.0",
-    "babel-preset-minify": "^0.5.1",
-    "deepmerge": "^4.2.2",
-    "eslint": "^7.18.0",
-    "eslint-plugin-vue": "^7.5.0",
-    "eslint-plugin-vuetify": "^1.0.0-beta.7",
-    "fibers": "^5.0.0",
-    "gridsome-plugin-robots-txt": "^1.0.2",
-    "purgecss": "^4.0.0",
-    "sass": "^1.32.5",
-    "sass-loader": "7.3.1",
-    "vuetify-loader": "^1.6.0",
-    "webpack-node-externals": "^2.5.2"
+    "@vitejs/plugin-vue": "^3.0.2",
+    "autoprefixer": "^10.4.8",
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8",
+    "typescript": "^4.6.4",
+    "vite": "^3.0.6",
+    "vue-tsc": "^0.39.5",
+    "prettier": "^2.7.1",
+    "eslint": "^8.21.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "@vue/eslint-config-typescript": "^11.0.0",
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.5.2",
+    "@tailwindcss/typography": "^0.5.4",
+    "@types/node": "16.11.48"
   }
 }
