@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
+</script>
 
 <template>
   <a
@@ -34,7 +36,7 @@
   </a>
   <!-- Discord -->
   <a
-    href="https://discord.gg/VkQYXAZ"
+    :href="DISCORD_URL"
     class="text-gray-400 hover:text-sky-400"
   >
     <svg
