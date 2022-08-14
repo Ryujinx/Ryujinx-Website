@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { useI18n } from "vue-i18n";
 import { teamMembers } from "@/common/constants/teams";
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -9,12 +12,11 @@ import { teamMembers } from "@/common/constants/teams";
     >
       <!-- Heading -->
       <div class="text-center">
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Our team</h2>
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">{{t("views.homepage.ourTeam")}}</h2>
         <h3
           class="text-lg md:text-xl md:leading-relaxed font-medium text-gray-600 lg:w-2/3 mx-auto"
         >
-          They are working nonstop behind the scenes to build the better Switch
-          emulator.
+          {{t("views.homepage.ourTeamDescription")}}
         </h3>
       </div>
 
