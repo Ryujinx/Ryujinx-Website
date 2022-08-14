@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 
-import BaseHeader from "@/common/components/BaseHeader.vue";
+import BaseHomeHeader from "@/common/components/BaseHomeHeader.vue";
 import BaseFooter from "@/common/components/BaseFooter.vue";
 
 const { currentRoute } = useRouter();
@@ -13,8 +13,8 @@ const { currentRoute } = useRouter();
     class="flex flex-col mx-auto w-full min-h-screen bg-gray-100"
   >
     <main id="page-content" class="flex flex-auto flex-col max-w-full">
-      <div class="bg-gray-800 overflow-hidden">
-        <BaseHeader />
+      <div class="bg-gray-800">
+        <BaseHomeHeader />
       </div>
 
       <div class="grow">

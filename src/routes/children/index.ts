@@ -4,11 +4,6 @@ const ContributePage = () => import("@/views/ContributePage.vue");
 
 export default [
   {
-    path: "/",
-    name: "home",
-    component: HomePage,
-  },
-  {
     path: "download",
     name: "download",
     component: DownloadPage,
