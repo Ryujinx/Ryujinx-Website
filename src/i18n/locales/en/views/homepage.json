@@ -12,5 +12,11 @@
   "compatibilityDescription": "Ryujinx has been tested on nearly 3,500 titles approximately 2,500 of those being considered playable.",
   "support": "Support",
   "supportDescription": "Need help ? Join the {0}. You can get help, as well as converse with fellow users and developers.",
-  "discord": "Ryujinx Discord server"
+  "discord": "Ryujinx Discord server",
+  "supportUs": "Support US",
+  "trustedCommunities": "Trusted by the communities",
+  "trustedCommunitiesDescription": "If you have contributions, suggestions, need emulator support or just want to get in touch with the team. Contact us on Twitter or Discord ;)",
+  "githubStar": "GitHub Stars",
+  "playableGames": "Playable games",
+  "patreonContributors": "Patreon Contributors"
 }
