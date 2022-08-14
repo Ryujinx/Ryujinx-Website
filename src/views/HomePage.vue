@@ -167,17 +167,22 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
     </div>
 
     <!-- Name -->
-    <div class="bg-cover" style="background-image: url('assets/images/wallp2.png');">
-      <!-- Heading -->
-      <div class="bg-sky-900 bg-opacity-90">
-        <div class="space-y-16 container xl:max-w-7xl mx-auto px-4 py-16 lg:px-8 lg:py-32">
+    <div
+      class="bg-cover"
+      style="background-image: url('assets/images/wallp2.png')"
+    >
+      <div class="bg-gray-800 bg-opacity-90 backdrop-filter">
+        <div
+          class="space-y-16 container xl:max-w-7xl mx-auto px-4 py-16 lg:px-8 lg:py-32"
+        >
           <div class="text-center">
-            <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">
-              Why the name ?
-            </h2>
-            <h3 class="text-lg md:text-xl md:leading-relaxed font-medium text-indigo-200 lg:w-2/3 mx-auto">
-              Spelled Ree-You-Jinx.
-              The name is based on the name "Ryujin." a Mythical (Sea-God) Dragon. The NX part of the name is from the Codename of the Switch itself.
+            <i18n-t tag="h2" keypath="views.homepage.nameQuestion" class="text-3xl md:text-4xl font-extrabold mb-4 text-white">
+              <span class="text-sky-500"> {{ t("views.homepage.name") }}</span>
+            </i18n-t>
+            <h3
+              class="text-lg md:text-xl md:leading-relaxed font-medium text-gray-200 lg:w-2/3 mx-auto"
+            >
+              {{ t("views.homepage.nameDescription") }}
             </h3>
           </div>
         </div>
@@ -190,24 +195,22 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
     <!-- Stats -->
     <div class="bg-gray-100 overflow-hidden">
       <div class="container xl:max-w-7xl mx-auto px-4 py-16 lg:px-8 lg:py-32">
-        <!-- Heading -->
         <div class="text-center mb-16">
           <div
             class="text-sm uppercase font-bold tracking-wider mb-1 text-sky-700"
           >
-            {{t("views.homepage.supportUs")}}
+            {{ t("views.homepage.supportUs") }}
           </div>
           <h2 class="text-3xl md:text-4xl font-extrabold mb-4">
-            {{t("views.homepage.trustedCommunities")}}
+            {{ t("views.homepage.trustedCommunities") }}
           </h2>
           <h3
             class="text-lg md:text-xl md:leading-relaxed font-medium text-gray-600 lg:w-2/3 mx-auto"
           >
-            {{t("views.homepage.trustedCommunitiesDescription")}}
+            {{ t("views.homepage.trustedCommunitiesDescription") }}
           </h3>
         </div>
 
-        <!-- Stats -->
         <div class="relative">
           <div
             class="pattern-dots-md text-gray-300 absolute top-0 right-0 w-32 h-32 transform -translate-y-12 translate-x-12"
@@ -223,7 +226,7 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
             >
               <dt class="text-4xl font-extrabold text-sky-600">12,5k+</dt>
               <dd class="text-sm uppercase tracking-wide font-semibold">
-                {{t("views.homepage.githubStar")}}
+                {{ t("views.homepage.githubStar") }}
               </dd>
             </dl>
             <dl
@@ -231,7 +234,7 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
             >
               <dt class="text-4xl font-extrabold text-sky-600">2,5k+</dt>
               <dd class="text-sm uppercase tracking-wide font-semibold">
-                {{t("views.homepage.playableGames")}}
+                {{ t("views.homepage.playableGames") }}
               </dd>
             </dl>
             <dl
@@ -239,7 +242,7 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
             >
               <dt class="text-4xl font-extrabold text-sky-600">450+</dt>
               <dd class="text-sm uppercase tracking-wide font-semibold">
-                {{t("views.homepage.patreonContributors")}}
+                {{ t("views.homepage.patreonContributors") }}
               </dd>
             </dl>
           </div>

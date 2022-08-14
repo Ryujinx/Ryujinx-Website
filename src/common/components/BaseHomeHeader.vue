@@ -13,7 +13,7 @@ const { t } = useI18n();
     class="bg-cover bg-bottom"
     style="background-image: url('assets/images/wallp.png')"
   >
-    <div class="bg-gray-800 bg-opacity-90 backdrop-filter backdrop-blur-sm">
+    <div class="bg-gray-800 bg-opacity-90 backdrop-filter">
       <!-- Header -->
       <header id="page-header" class="flex flex-none items-center py-10">
         <div

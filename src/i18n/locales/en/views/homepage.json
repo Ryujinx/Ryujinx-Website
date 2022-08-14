@@ -18,5 +18,8 @@
   "trustedCommunitiesDescription": "If you have contributions, suggestions, need emulator support or just want to get in touch with the team. Contact us on Twitter or Discord ;)",
   "githubStar": "GitHub Stars",
   "playableGames": "Playable games",
-  "patreonContributors": "Patreon Contributors"
+  "patreonContributors": "Patreon Contributors",
+  "nameQuestion": "Why the {0} ?",
+  "name": "name",
+  "nameDescription": "  Spelled Ree-You-Jinx. The name is based on the name \"Ryujin.\" a Mythical (Sea-God) Dragon. The NX part of the name is from the Codename of the Switch itself."
 }
