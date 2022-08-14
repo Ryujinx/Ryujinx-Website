@@ -166,16 +166,34 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
       </div>
     </div>
 
+    <!-- Name -->
+    <div class="bg-cover" style="background-image: url('assets/images/wallp2.png');">
+      <!-- Heading -->
+      <div class="bg-sky-900 bg-opacity-90">
+        <div class="space-y-16 container xl:max-w-7xl mx-auto px-4 py-16 lg:px-8 lg:py-32">
+          <div class="text-center">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-white">
+              Why the name ?
+            </h2>
+            <h3 class="text-lg md:text-xl md:leading-relaxed font-medium text-indigo-200 lg:w-2/3 mx-auto">
+              Spelled Ree-You-Jinx.
+              The name is based on the name "Ryujin." a Mythical (Sea-God) Dragon. The NX part of the name is from the Codename of the Switch itself.
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team List -->
     <TeamList />
 
     <!-- Stats -->
-    <!-- Stats Section: Bubble With Title -->
     <div class="bg-gray-100 overflow-hidden">
       <div class="container xl:max-w-7xl mx-auto px-4 py-16 lg:px-8 lg:py-32">
         <!-- Heading -->
         <div class="text-center mb-16">
           <div
-            class="text-sm uppercase font-bold tracking-wider mb-1 text-blue-700"
+            class="text-sm uppercase font-bold tracking-wider mb-1 text-sky-700"
           >
             {{t("views.homepage.supportUs")}}
           </div>
@@ -203,7 +221,7 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
             <dl
               class="space-y-1 px-5 py-12 hover:bg-gray-50 hover:bg-opacity-50"
             >
-              <dt class="text-4xl font-extrabold text-blue-600">12,5k+</dt>
+              <dt class="text-4xl font-extrabold text-sky-600">12,5k+</dt>
               <dd class="text-sm uppercase tracking-wide font-semibold">
                 {{t("views.homepage.githubStar")}}
               </dd>
@@ -211,7 +229,7 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
             <dl
               class="space-y-1 px-5 py-12 hover:bg-gray-50 hover:bg-opacity-50"
             >
-              <dt class="text-4xl font-extrabold text-blue-600">2,5k+</dt>
+              <dt class="text-4xl font-extrabold text-sky-600">2,5k+</dt>
               <dd class="text-sm uppercase tracking-wide font-semibold">
                 {{t("views.homepage.playableGames")}}
               </dd>
@@ -219,7 +237,7 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
             <dl
               class="space-y-1 px-5 py-12 hover:bg-gray-50 hover:bg-opacity-50"
             >
-              <dt class="text-4xl font-extrabold text-blue-600">450+</dt>
+              <dt class="text-4xl font-extrabold text-sky-600">450+</dt>
               <dd class="text-sm uppercase tracking-wide font-semibold">
                 {{t("views.homepage.patreonContributors")}}
               </dd>
