@@ -1,0 +1,9 @@
+{
+  "title1": "Latest {0}",
+  "title2": "Downloads",
+  "subTitle": "Download the latest version of the emulator with our automated builds.",
+  "download": "Download",
+  "notSupported": "Currently not supported",
+  "supportWindows": "Support Windows 8.1, 10 & 11",
+  "supportLinux": "Support for most common distros."
+}

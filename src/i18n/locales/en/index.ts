@@ -2,6 +2,7 @@ import navigations from "./navigations.json";
 import footer from "./footer.json";
 import header from "./header.json";
 import homepage from "./views/homepage.json";
+import download from "./views/download.json";
 
 export const en = {
   navigations: navigations,
@@ -9,5 +10,6 @@ export const en = {
   footer: footer,
   views: {
     homepage: homepage,
+    download: download,
   },
 };
