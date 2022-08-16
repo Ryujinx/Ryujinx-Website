@@ -4,6 +4,7 @@
   "subTitle": "Download the latest version of the emulator with our automated builds.",
   "download": "Download",
   "notSupported": "Currently not supported",
+  "supportPlanned": "Support planned",
   "supportWindows": "Support Windows 8.1, 10 & 11",
   "supportLinux": "Support for most common distros."
 }

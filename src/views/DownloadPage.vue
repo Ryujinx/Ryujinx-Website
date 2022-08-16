@@ -98,13 +98,15 @@ const { t } = useI18n();
             class="absolute inset-0 bg-white rounded-xl shadow-md shadow-gray-200 transition duration-100 scale-100 opacity-0"
           ></div>
           <div class="relative text-center">
+            <div
+              class="text-xs uppercase text-gray-400 font-semibold tracking-wider mb-4"
+            >
+              {{ t("views.download.supportPlanned") }}
+            </div>
             <div class="relative w-12 mb-8 text-indigo-500 mx-auto">
               <img src="/assets/images/icons/macos.png" alt="macos logo" />
             </div>
             <h4 class="text-lg font-semibold mb-1 text-gray-900">macOS</h4>
-            <p class="leading-relaxed text-gray-500 text-sm font-medium">
-              1.1.27
-            </p>
             <div
               class="flex justify-center items-center space-x-1 mt-4 pt-4 text-sm font-medium text-gray-500 border-t border-gray-100"
             >
