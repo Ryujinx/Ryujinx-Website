@@ -4,4 +4,5 @@ interface ImportMetaEnv {
   VITE_COMPATIBILITY_URL: string;
   VITE_GUIDE_URL: string;
   VITE_DISCORD_URL: string;
+  VITE_RELEASE_URL: string;
 }
