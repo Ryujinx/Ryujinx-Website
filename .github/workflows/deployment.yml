@@ -3,39 +3,33 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - master
+      - website-redesign
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - name: "Checkout"
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: "Setup NodeJS"
-      uses: actions/setup-node@v1
+    - uses: actions/setup-node@v3
       with:
-        node-version: '14.x'
+        node-version: 16
 
     - name: "Install NPM dependencies"
-      run: |
-        # Workaround (see https://github.com/gridsome/gridsome/issues/1385)
-        export VUE_CLI_BABEL_TRANSPILE_MODULES=true
-        npm install
+      run: npm install
 
     - name: "Build"
-      run: |
-        # Workaround (see https://github.com/gridsome/gridsome/issues/1385)
-        export VUE_CLI_BABEL_TRANSPILE_MODULES=true
-        npm run deploy
+      run: npm run build
 
     - name: "Deploy"
       uses: peaceiris/actions-gh-pages@v3
       with:
-        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        personal_token: ${{ secrets.PAT }}
         publish_dir: ./dist
         publish_branch: master
-        external_repository: Ryujinx/ryujinx.github.io 
+        external_repository: Yoshiyes/yoshiyes.github.io
         user_name: GitHub Action
         user_email: action@github.com
         force_orphan: true
