@@ -3,7 +3,7 @@ import { useI18n } from "vue-i18n";
 import { computed, onMounted, ref } from "vue";
 import axios from "axios";
 import dayjs from "dayjs";
-import { CogIcon } from "@heroicons/vue/solid";
+import { CogIcon, ExternalLinkIcon } from "@heroicons/vue/solid";
 
 import { DownloadRelease } from "@/types";
 
@@ -28,7 +28,7 @@ const totalDownload = computed(() => {
 const fetchBuilds = async () => {
   try {
     const result = await axios.get<DownloadRelease>(
-      import.meta.env.VITE_RELEASE_URL
+      import.meta.env.VITE_RELEASE_URL,
     );
     downloadRelease.value = result.data;
 
@@ -63,7 +63,7 @@ const fetchBuilds = async () => {
           >
             <span
               class="bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-red-500"
-              >{{ t("views.download.title2") }}</span
+            >{{ t("views.download.title2") }}</span
             >
           </i18n-t>
           <div class="w-12 h-1.5 bg-gray-200 rounded-lg mb-3 mx-auto"></div>
@@ -81,8 +81,8 @@ const fetchBuilds = async () => {
         >
           <!-- Windows -->
           <a
-            class="group relative p-4 lg:p-6 bg-white rounded-xl transition duration-150 shadow-md shadow-gray-100"
             :href="windowBuildUrl"
+            class="group relative p-4 lg:p-6 bg-white rounded-xl transition duration-150 shadow-md shadow-gray-100"
           >
             <div
               class="absolute inset-0 bg-white rounded-xl shadow-md shadow-gray-200 transition duration-100 scale-100 opacity-0 group-hover:opacity-100 group-hover:scale-105 group-active:scale-100 group-active:opacity-0"
@@ -113,8 +113,8 @@ const fetchBuilds = async () => {
 
           <!-- Linux -->
           <a
-            class="group relative p-4 lg:p-6 bg-white rounded-xl transition duration-150 shadow-md shadow-gray-100"
             :href="linuxBuildUrl"
+            class="group relative p-4 lg:p-6 bg-white rounded-xl transition duration-150 shadow-md shadow-gray-100"
           >
             <div
               class="absolute inset-0 bg-white rounded-xl shadow-md shadow-gray-200 transition duration-100 scale-100 opacity-0 group-hover:opacity-100 group-hover:scale-105 group-active:scale-100 group-active:opacity-0"
@@ -205,7 +205,7 @@ const fetchBuilds = async () => {
                 <li class="flex items-center space-x-2">
                   <CogIcon class="text-sky-500 inline-block w-5 h-5" />
                   <span
-                    ><span class="font-bold uppercase">
+                  ><span class="font-bold uppercase">
                       {{ downloadRelease.target_commitish }}
                     </span>
                     {{ t("views.download.branch") }}
@@ -240,6 +240,14 @@ const fetchBuilds = async () => {
                   </span>
                 </li>
               </ul>
+              <div>
+                <a
+                  :href="downloadRelease.html_url"
+                  class="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none w-full px-4 py-3 leading-6 rounded border-sky-700 bg-sky-700 text-white hover:text-white hover:bg-sky-800 hover:border-sky-800 focus:ring focus:ring-sky-500 focus:ring-opacity-50 active:bg-sky-700 active:border-sky-700" target="_blank">
+                  <ExternalLinkIcon class="opacity-50 inline-block w-5 h-5" />
+                  <span>{{ t("views.download.manualDownload") }}</span>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -249,8 +257,8 @@ const fetchBuilds = async () => {
               <a :href="downloadRelease.author.html_url">
                 <div>
                   <img
-                    alt="Author avatar"
                     :src="downloadRelease.author.avatar_url"
+                    alt="Author avatar"
                     class="w-16 h-16 inline-block"
                   />
                 </div>

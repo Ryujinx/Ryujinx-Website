@@ -1,6 +1,6 @@
 {
   "title1": "Latest {0}",
-  "title2": "Downloads",
+  "title2": "Download",
   "subTitle": "Download the latest version of the emulator with our automated builds.",
   "download": "Download",
   "notSupported": "Currently not supported",
@@ -12,5 +12,6 @@
   "branch": "branch",
   "assets": "assets",
   "downloads": "downloads",
-  "tag": "Tag"
+  "tag": "Tag",
+  "manualDownload": "Manual download"
 }
