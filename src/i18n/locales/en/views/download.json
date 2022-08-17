@@ -6,7 +6,7 @@
   "download": "Download",
   "notSupported": "Currently not supported",
   "supportPlanned": "Support planned",
-  "supportWindows": "Support Windows 8.1, 10 & 11",
+  "supportWindows": "Support Windows 10 & 11",
   "supportLinux": "Support for most common distros",
   "buildInformation": "Build information",
   "buildRelease": "This build was released on {0}",
