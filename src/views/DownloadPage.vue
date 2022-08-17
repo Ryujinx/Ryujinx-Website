@@ -3,11 +3,16 @@ import { useI18n } from "vue-i18n";
 import { computed, onMounted, ref } from "vue";
 import axios from "axios";
 import dayjs from "dayjs";
-import { CogIcon, ExternalLinkIcon } from "@heroicons/vue/solid";
+import {
+  CogIcon,
+  ExternalLinkIcon,
+  InformationCircleIcon,
+} from "@heroicons/vue/solid";
 
 import { DownloadRelease } from "@/types";
 
 const GUIDE_URL = import.meta.env.VITE_GUIDE_URL;
+const LDN_BUILD_URL = import.meta.env.VITE_LDN_BUILD_URL;
 const { t } = useI18n();
 const isLoading = ref(true);
 const downloadRelease = ref<DownloadRelease>();
@@ -29,7 +34,7 @@ const totalDownload = computed(() => {
 const fetchBuilds = async () => {
   try {
     const result = await axios.get<DownloadRelease>(
-      import.meta.env.VITE_RELEASE_URL,
+      import.meta.env.VITE_RELEASE_URL
     );
     downloadRelease.value = result.data;
 
@@ -63,7 +68,7 @@ const fetchBuilds = async () => {
           >
             <span
               class="bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-red-500"
-            >{{ t("views.download.title2") }}</span
+              >{{ t("views.download.title2") }}</span
             >
           </i18n-t>
           <div class="w-12 h-1.5 bg-gray-200 rounded-lg mb-3 mx-auto"></div>
@@ -72,7 +77,8 @@ const fetchBuilds = async () => {
             keypath="views.download.subTitle"
             tag="h2"
           >
-            <a :href="GUIDE_URL" class="text-sky-500 underline">{{ t("views.download.startupGuide") }}
+            <a :href="GUIDE_URL" class="text-sky-500 underline"
+              >{{ t("views.download.startupGuide") }}
             </a>
           </i18n-t>
         </div>
@@ -208,7 +214,7 @@ const fetchBuilds = async () => {
                 <li class="flex items-center space-x-2">
                   <CogIcon class="text-sky-500 inline-block w-5 h-5" />
                   <span
-                  ><span class="font-bold uppercase">
+                    ><span class="font-bold uppercase">
                       {{ downloadRelease.target_commitish }}
                     </span>
                     {{ t("views.download.branch") }}
@@ -247,7 +253,8 @@ const fetchBuilds = async () => {
                 <a
                   :href="downloadRelease.html_url"
                   class="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none w-full px-4 py-3 leading-6 rounded border-sky-700 bg-sky-700 text-white hover:text-white hover:bg-sky-800 hover:border-sky-800 focus:ring focus:ring-sky-500 focus:ring-opacity-50 active:bg-sky-700 active:border-sky-700"
-                  target="_blank">
+                  target="_blank"
+                >
                   <ExternalLinkIcon class="opacity-50 inline-block w-5 h-5" />
                   <span>{{ t("views.download.manualDownload") }}</span>
                 </a>
@@ -271,6 +278,39 @@ const fetchBuilds = async () => {
                 >
                   <span>{{ downloadRelease.author.login }}</span>
                 </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="p-10 lg:py-12 lg:px-16 bg-white rounded text-center relative"
+        >
+          <div class="space-y-10">
+            <!-- Heading -->
+            <div class="text-center">
+              <i18n-t class="text-2xl md:text-2xl font-extrabold mb-4" tag="h2" keypath="views.download.ldnBuildTitle">
+                <span class="text-sky-600">{{ t("views.download.ldnBuild") }}</span>
+              </i18n-t>
+              <h3
+                class="text-lg md:text-xl md:leading-relaxed font-medium text-gray-600"
+              >
+                {{ t("views.download.ldnBuildDescription") }}
+              </h3>
+            </div>
+
+            <div
+              class="flex flex-col sm:flex-row sm:items-center sm:justify-center space-y-4 sm:space-y-0 sm:space-x-2"
+            >
+              <a
+                :href="LDN_BUILD_URL"
+                class="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none px-6 py-4 leading-6 rounded border-gray-200 bg-gray-200 text-gray-700 hover:text-gray-700 hover:bg-gray-300 hover:border-gray-300 focus:ring focus:ring-gray-500 focus:ring-opacity-25 active:bg-gray-200 active:border-gray-200"
+                target="_blank"
+              >
+                <InformationCircleIcon
+                  class="opacity-50 hi-solid hi-information-circle inline-block w-5 h-5"
+                />
+                <span>{{ t("views.download.learnMore") }}</span>
               </a>
             </div>
           </div>
