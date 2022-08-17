@@ -175,6 +175,40 @@ const fetchBuilds = async () => {
           </div>
         </div>
 
+        <!-- LDN Build -->
+        <div
+          class="p-10 lg:py-10 lg:px-16 bg-white rounded text-center relative"
+        >
+          <div class="space-y-10">
+            <!-- Heading -->
+            <div class="text-center">
+              <i18n-t class="text-2xl md:text-2xl font-extrabold mb-4" tag="h2" keypath="views.download.ldnBuildTitle">
+                <span class="text-sky-600">{{ t("views.download.ldnBuild") }}</span>
+              </i18n-t>
+              <h3
+                class="text-lg md:text-xl md:leading-relaxed font-medium text-gray-600"
+              >
+                {{ t("views.download.ldnBuildDescription") }}
+              </h3>
+            </div>
+
+            <div
+              class="flex flex-col sm:flex-row sm:items-center sm:justify-center space-y-4 sm:space-y-0 sm:space-x-2"
+            >
+              <a
+                :href="LDN_BUILD_URL"
+                class="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none px-6 py-4 leading-6 rounded border-gray-200 bg-gray-200 text-gray-700 hover:text-gray-700 hover:bg-gray-300 hover:border-gray-300 focus:ring focus:ring-gray-500 focus:ring-opacity-25 active:bg-gray-200 active:border-gray-200"
+                target="_blank"
+              >
+                <InformationCircleIcon
+                  class="opacity-50 hi-solid hi-information-circle inline-block w-5 h-5"
+                />
+                <span>{{ t("views.download.learnMore") }}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
         <!-- Build -->
         <div
           v-if="!isLoading"
@@ -278,39 +312,6 @@ const fetchBuilds = async () => {
                 >
                   <span>{{ downloadRelease.author.login }}</span>
                 </div>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="p-10 lg:py-12 lg:px-16 bg-white rounded text-center relative"
-        >
-          <div class="space-y-10">
-            <!-- Heading -->
-            <div class="text-center">
-              <i18n-t class="text-2xl md:text-2xl font-extrabold mb-4" tag="h2" keypath="views.download.ldnBuildTitle">
-                <span class="text-sky-600">{{ t("views.download.ldnBuild") }}</span>
-              </i18n-t>
-              <h3
-                class="text-lg md:text-xl md:leading-relaxed font-medium text-gray-600"
-              >
-                {{ t("views.download.ldnBuildDescription") }}
-              </h3>
-            </div>
-
-            <div
-              class="flex flex-col sm:flex-row sm:items-center sm:justify-center space-y-4 sm:space-y-0 sm:space-x-2"
-            >
-              <a
-                :href="LDN_BUILD_URL"
-                class="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none px-6 py-4 leading-6 rounded border-gray-200 bg-gray-200 text-gray-700 hover:text-gray-700 hover:bg-gray-300 hover:border-gray-300 focus:ring focus:ring-gray-500 focus:ring-opacity-25 active:bg-gray-200 active:border-gray-200"
-                target="_blank"
-              >
-                <InformationCircleIcon
-                  class="opacity-50 hi-solid hi-information-circle inline-block w-5 h-5"
-                />
-                <span>{{ t("views.download.learnMore") }}</span>
               </a>
             </div>
           </div>
