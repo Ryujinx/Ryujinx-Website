@@ -176,14 +176,20 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
           class="space-y-16 container xl:max-w-7xl mx-auto px-4 py-16 lg:px-8 lg:py-32"
         >
           <div class="text-center">
-            <i18n-t tag="h2" keypath="views.homepage.nameQuestion" class="text-3xl md:text-4xl font-extrabold mb-4 text-white">
+            <i18n-t
+              tag="h2"
+              keypath="views.homepage.nameQuestion"
+              class="text-3xl md:text-4xl font-extrabold mb-4 text-white"
+            >
               <span class="text-sky-500"> {{ t("views.homepage.name") }}</span>
             </i18n-t>
-            <h3
+            <i18n-t
+              keypath="views.homepage.nameDescription"
+              tag="h3"
               class="text-lg md:text-xl md:leading-relaxed font-medium text-gray-200 lg:w-2/3 mx-auto"
             >
-              {{ t("views.homepage.nameDescription") }}
-            </h3>
+              <span class="italic">{{t("views.homepage.spelled")}}</span>
+            </i18n-t>
           </div>
         </div>
       </div>
