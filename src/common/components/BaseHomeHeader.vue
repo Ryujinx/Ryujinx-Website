@@ -11,7 +11,7 @@ const { t } = useI18n();
 <template>
   <div
     class="bg-cover bg-bottom"
-    style="background-image: url('assets/images/wallp.png')"
+    style="background-image: url('/assets/images/wallp.png')"
   >
     <div class="bg-gray-800 bg-opacity-90 backdrop-filter">
       <!-- Header -->
@@ -25,7 +25,7 @@ const { t } = useI18n();
               class="inline-flex items-center space-x-2 font-bold text-lg tracking-wide text-white hover:opacity-75"
             >
               <img
-                src="assets/images/logo.png"
+                src="/assets/images/logo.png"
                 class="text-indigo-300 opacity-75 hi-outline hi-cube-transparent inline-block w-6 h-6"
                 alt="logo"
               />
@@ -54,24 +54,26 @@ const { t } = useI18n();
         >
           <span class="text-red-500">{{ t("header.title2") }}</span>
         </i18n-t>
-        <i18n-t keypath="header.description" tag="h2" class="text-lg md:text-xl md:leading-relaxed font-medium text-gray-400 lg:w-2/3 mx-auto">
+        <i18n-t
+          keypath="header.description"
+          tag="h2"
+          class="text-lg md:text-xl md:leading-relaxed font-medium text-gray-400 lg:w-2/3 mx-auto"
+        >
           <span class="text-red-50">{{ t("header.author") }}</span>
         </i18n-t>
         <div
           class="flex flex-col sm:flex-row sm:items-center sm:justify-center space-y-2 sm:space-y-0 sm:space-x-2 pt-10 pb-16"
         >
-          <RouterLink
-            :to="{name: 'download'}"
-            class="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none px-6 py-4 leading-6 rounded border-sky-500 bg-sky-500 text-white hover:text-white hover:bg-sky-800 hover:border-sky-800 focus:ring focus:ring-sky-500 focus:ring-opacity-50 active:bg-sky-700 active:border-sky-700"
+          <GButton rounded variant="sky" size="elg" :to="{ name: 'download' }">
+            {{ t("header.getStarted") }}
+          </GButton>
+          <GButton
+            rounded
+            variant="red"
+            size="elg"
+            :to="{ name: 'contribute' }"
+            >{{ t("header.contribute") }}</GButton
           >
-            <span>{{t("header.getStarted")}}</span>
-          </RouterLink>
-          <RouterLink
-            :to="{name: 'contribute'}"
-            class="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none px-6 py-4 leading-6 rounded border-red-500 bg-red-500 text-white hover:text-white hover:bg-red-800 hover:border-red-800 focus:ring focus:ring-red-500 focus:ring-opacity-25 active:bg-red-700 active:border-gray-700"
-          >
-            <span>{{t("header.contribute")}}</span>
-          </RouterLink>
         </div>
       </div>
     </div>

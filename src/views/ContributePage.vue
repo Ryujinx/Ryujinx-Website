@@ -44,7 +44,7 @@ const PATREON_URL = import.meta.env.VITE_PATREON_URL;
             <img
               alt="Hero Image"
               class="relative mx-auto"
-              src="assets/images/shell.png"
+              src="/assets/images/shell.png"
             />
           </div>
         </div>

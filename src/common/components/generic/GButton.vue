@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, defineEmits, defineProps } from "vue";
+import { computed, defineEmits, defineProps, PropType } from "vue";
+import { RouteLocationRaw } from "vue-router/dist/vue-router";
 import { RefreshIcon } from "@heroicons/vue/outline";
 
 import {
@@ -14,7 +15,7 @@ import {
   buttonLightOrange,
   buttonGrey,
   buttonLightGray,
-  buttonSky
+  buttonSky,
 } from "@/common/constants/buttonColors";
 
 const props = defineProps({
@@ -157,6 +158,10 @@ const componentClass = computed(() => {
   ];
 });
 
+const attributes = computed(() => {
+ return props.to as RouteLocationRaw;
+});
+
 const onClick = () => {
   if (props.disabled || props.loading) {
     return;
@@ -170,7 +175,7 @@ const onClick = () => {
   <Component
     :is="componentType"
     v-if="componentType !== 'router-link' ||  disabled"
-    :to="to"
+    :to="attributes"
     :href="href"
     :type="type"
     :disabled="disabled"
@@ -188,7 +193,7 @@ const onClick = () => {
   </Component>
 
   <!-- Prevent Href attribute override -->
-  <router-link v-else :to="to" :class="componentClass" :type="type">
+  <router-link v-else :to="attributes" :class="componentClass" :type="type">
     <slot name="loading-icon">
       <RefreshIcon
         v-if="loading"

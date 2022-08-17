@@ -5,7 +5,7 @@ export const buttonEmerald =
 export const buttonOrange =
   "border-orange-700 bg-orange-700 text-white hover:text-white hover:bg-orange-800 hover:border-orange-800 focus:ring focus:ring-orange-500 focus:ring-opacity-50 active:bg-orange-700 active:border-orange-700";
 export const buttonRed =
-  "border-red-700 bg-red-700 text-white hover:text-white hover:bg-red-800 hover:border-red-800 focus:ring focus:ring-red-500 focus:ring-opacity-50 active:bg-red-700 active:border-red-700";
+  "border-red-500 bg-red-500 text-white hover:text-white hover:bg-red-700 hover:border-red-700 focus:ring focus:ring-red-500 focus:ring-opacity-50 active:bg-red-700 active:border-red-700";
 export const buttonBlue =
   "border-blue-700 bg-blue-700 text-white hover:text-white hover:bg-blue-800 hover:border-blue-800 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:bg-blue-700 active:border-blue-700";
 export const buttonSky =

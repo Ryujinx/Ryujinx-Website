@@ -12,7 +12,7 @@ import { navigations } from "@/common/constants/navigation";
         <div class="flex flex-col text-center md:flex-row md:items-center md:justify-between space-y-6 md:space-y-0 container xl:max-w-7xl mx-auto px-4 lg:px-10">
           <div>
             <RouterLink :to="{name: 'home'}" class="inline-flex items-center space-x-2 font-bold text-lg tracking-wide text-white hover:opacity-75">
-              <img src="assets/images/logo.png" class="text-indigo-300 opacity-75 hi-outline hi-cube-transparent inline-block w-6 h-6" alt="logo">
+              <img src="/assets/images/logo.png" class="text-indigo-300 opacity-75 hi-outline hi-cube-transparent inline-block w-6 h-6" alt="logo">
               <span>Ryujinx</span>
             </RouterLink>
           </div>

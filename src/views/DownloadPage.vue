@@ -15,7 +15,7 @@ const GUIDE_URL = import.meta.env.VITE_GUIDE_URL;
 const LDN_BUILD_URL = import.meta.env.VITE_LDN_BUILD_URL;
 const { t } = useI18n();
 const isLoading = ref(true);
-const downloadRelease = ref<DownloadRelease>();
+const downloadRelease = ref<DownloadRelease>({} as DownloadRelease);
 const linuxBuildUrl = ref("");
 const windowBuildUrl = ref("");
 
