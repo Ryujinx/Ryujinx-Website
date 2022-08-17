@@ -244,17 +244,6 @@ const fetchBuilds = async () => {
               class="lg:flex lg:space-x-12 space-y-4 lg:space-y-0 font-medium"
             >
               <ul class="space-y-4 text-sm">
-                <!-- Branch -->
-                <li class="flex items-center space-x-2">
-                  <CogIcon class="text-sky-500 inline-block w-5 h-5" />
-                  <span
-                    ><span class="font-bold uppercase">
-                      {{ downloadRelease.target_commitish }}
-                    </span>
-                    {{ t("views.download.branch") }}
-                  </span>
-                </li>
-
                 <!-- Assets -->
                 <li class="flex items-center space-x-2">
                   <CogIcon class="text-sky-500 inline-block w-5 h-5" />
@@ -265,9 +254,8 @@ const fetchBuilds = async () => {
                     {{ t("views.download.assets") }}
                   </span>
                 </li>
-              </ul>
 
-              <ul class="space-y-4 text-sm">
+                <!-- Tag -->
                 <li class="flex items-center space-x-2">
                   <CogIcon class="text-sky-500 inline-block w-5 h-5" />
                   <span>
@@ -275,6 +263,9 @@ const fetchBuilds = async () => {
                     <strong>{{ downloadRelease.tag_name }}</strong>
                   </span>
                 </li>
+              </ul>
+
+              <ul class="space-y-4 text-sm">
                 <li class="flex items-center space-x-2">
                   <CogIcon class="text-sky-500 inline-block w-5 h-5" />
                   <span>
