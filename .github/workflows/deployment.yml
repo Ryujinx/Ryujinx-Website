@@ -1,9 +1,7 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches:
-      - website-redesign
+  workflow_dispatch:
 
 jobs:
   build:
