@@ -7,6 +7,7 @@ import { CogIcon, ExternalLinkIcon } from "@heroicons/vue/solid";
 
 import { DownloadRelease } from "@/types";
 
+const GUIDE_URL = import.meta.env.VITE_GUIDE_URL;
 const { t } = useI18n();
 const isLoading = ref(true);
 const downloadRelease = ref<DownloadRelease>();
@@ -35,8 +36,7 @@ const fetchBuilds = async () => {
     downloadRelease.value?.assets.forEach((asset) => {
       if (asset.name.endsWith("win_x64.zip")) {
         windowBuildUrl.value = asset.browser_download_url;
-      }
-      if (asset.name.endsWith("linux_x64.tar.gz")) {
+      } else if (asset.name.endsWith("linux_x64.tar.gz")) {
         linuxBuildUrl.value = asset.browser_download_url;
       }
     });
@@ -67,11 +67,14 @@ const fetchBuilds = async () => {
             >
           </i18n-t>
           <div class="w-12 h-1.5 bg-gray-200 rounded-lg mb-3 mx-auto"></div>
-          <h3
+          <i18n-t
             class="md:text-lg text-gray-600 md:leading-relaxed font-medium lg:w-2/3 mx-auto"
+            keypath="views.download.subTitle"
+            tag="h2"
           >
-            {{ t("views.download.subTitle") }}
-          </h3>
+            <a :href="GUIDE_URL" class="text-sky-500 underline">{{ t("views.download.startupGuide") }}
+            </a>
+          </i18n-t>
         </div>
 
         <!-- Features -->
@@ -243,7 +246,8 @@ const fetchBuilds = async () => {
               <div>
                 <a
                   :href="downloadRelease.html_url"
-                  class="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none w-full px-4 py-3 leading-6 rounded border-sky-700 bg-sky-700 text-white hover:text-white hover:bg-sky-800 hover:border-sky-800 focus:ring focus:ring-sky-500 focus:ring-opacity-50 active:bg-sky-700 active:border-sky-700" target="_blank">
+                  class="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none w-full px-4 py-3 leading-6 rounded border-sky-700 bg-sky-700 text-white hover:text-white hover:bg-sky-800 hover:border-sky-800 focus:ring focus:ring-sky-500 focus:ring-opacity-50 active:bg-sky-700 active:border-sky-700"
+                  target="_blank">
                   <ExternalLinkIcon class="opacity-50 inline-block w-5 h-5" />
                   <span>{{ t("views.download.manualDownload") }}</span>
                 </a>

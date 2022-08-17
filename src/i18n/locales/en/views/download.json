@@ -1,7 +1,8 @@
 {
   "title1": "Latest {0}",
   "title2": "Download",
-  "subTitle": "Download the latest version of the emulator with our automated builds.",
+  "subTitle": "Don't forget to consult {0} after installation",
+  "startupGuide": "the start-up guide",
   "download": "Download",
   "notSupported": "Currently not supported",
   "supportPlanned": "Support planned",
