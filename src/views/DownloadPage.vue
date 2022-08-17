@@ -20,7 +20,7 @@ onMounted(() => {
 const totalDownload = computed(() => {
   let total = 0;
 
-  downloadRelease.value?.assets.forEach(a => total += a.download_count);
+  downloadRelease.value?.assets.forEach((a) => (total += a.download_count));
 
   return total;
 });
@@ -28,11 +28,18 @@ const totalDownload = computed(() => {
 const fetchBuilds = async () => {
   try {
     const result = await axios.get<DownloadRelease>(
-      import.meta.env.VITE_RELEASE_URL,
+      import.meta.env.VITE_RELEASE_URL
     );
     downloadRelease.value = result.data;
 
-    console.log(result.data);
+    downloadRelease.value?.assets.forEach((asset) => {
+      if (asset.name.endsWith("win_x64.zip")) {
+        windowBuildUrl.value = asset.browser_download_url;
+      }
+      if (asset.name.endsWith("linux_x64.tar.gz")) {
+        linuxBuildUrl.value = asset.browser_download_url;
+      }
+    });
   } catch (err) {
     console.error(err);
   }
@@ -56,7 +63,7 @@ const fetchBuilds = async () => {
           >
             <span
               class="bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-red-500"
-            >{{ t("views.download.title2") }}</span
+              >{{ t("views.download.title2") }}</span
             >
           </i18n-t>
           <div class="w-12 h-1.5 bg-gray-200 rounded-lg mb-3 mx-auto"></div>
@@ -75,7 +82,7 @@ const fetchBuilds = async () => {
           <!-- Windows -->
           <a
             class="group relative p-4 lg:p-6 bg-white rounded-xl transition duration-150 shadow-md shadow-gray-100"
-            href="javascript:void(0)"
+            :href="windowBuildUrl"
           >
             <div
               class="absolute inset-0 bg-white rounded-xl shadow-md shadow-gray-200 transition duration-100 scale-100 opacity-0 group-hover:opacity-100 group-hover:scale-105 group-active:scale-100 group-active:opacity-0"
@@ -107,7 +114,7 @@ const fetchBuilds = async () => {
           <!-- Linux -->
           <a
             class="group relative p-4 lg:p-6 bg-white rounded-xl transition duration-150 shadow-md shadow-gray-100"
-            href="javascript:void(0)"
+            :href="linuxBuildUrl"
           >
             <div
               class="absolute inset-0 bg-white rounded-xl shadow-md shadow-gray-200 transition duration-100 scale-100 opacity-0 group-hover:opacity-100 group-hover:scale-105 group-active:scale-100 group-active:opacity-0"
@@ -165,13 +172,18 @@ const fetchBuilds = async () => {
           class="md:flex items-center rounded-lg ring-1 ring-gray-50 ring-opacity-5 bg-white"
         >
           <div class="grow p-5 lg:p-6">
-            <h4 class="text-xl font-bold mb-1">Build information</h4>
-            <p class="leading-relaxed text-gray-500 mb-5">
-              This build was released on
+            <h4 class="text-xl font-bold mb-1">
+              {{ t("views.download.buildInformation") }}
+            </h4>
+            <i18n-t
+              class="leading-relaxed text-gray-500 mb-5"
+              keypath="views.download.buildRelease"
+              tag="p"
+            >
               <span class="font-semibold">
                 {{ dayjs(downloadRelease.published_at).format("YYYY-MM-DD") }}
               </span>
-            </p>
+            </i18n-t>
             <h5 class="flex items-center my-8">
               <span
                 class="text-sm uppercase tracking-wide text-blue-600 font-semibold mr-3"
@@ -192,24 +204,40 @@ const fetchBuilds = async () => {
                 <!-- Branch -->
                 <li class="flex items-center space-x-2">
                   <CogIcon class="text-sky-500 inline-block w-5 h-5" />
-                  <span> <span class="font-bold uppercase">{{ downloadRelease.target_commitish }}</span> branch </span>
+                  <span
+                    ><span class="font-bold uppercase">
+                      {{ downloadRelease.target_commitish }}
+                    </span>
+                    {{ t("views.download.branch") }}
+                  </span>
                 </li>
 
                 <!-- Assets -->
                 <li class="flex items-center space-x-2">
                   <CogIcon class="text-sky-500 inline-block w-5 h-5" />
-                  <span> <span class="font-bold uppercase">{{ downloadRelease.assets.length }}</span> builds </span>
+                  <span>
+                    <span class="font-bold uppercase">
+                      {{ downloadRelease.assets.length }}
+                    </span>
+                    {{ t("views.download.assets") }}
+                  </span>
                 </li>
               </ul>
 
               <ul class="space-y-4 text-sm">
                 <li class="flex items-center space-x-2">
                   <CogIcon class="text-sky-500 inline-block w-5 h-5" />
-                  <span> Tag : <strong>{{ downloadRelease.tag_name }}</strong></span>
+                  <span>
+                    {{ t("views.download.tag") }}:
+                    <strong>{{ downloadRelease.tag_name }}</strong>
+                  </span>
                 </li>
                 <li class="flex items-center space-x-2">
                   <CogIcon class="text-sky-500 inline-block w-5 h-5" />
-                  <span> <strong>{{ totalDownload }}</strong> downloads </span>
+                  <span>
+                    <strong>{{ totalDownload }}</strong>
+                    {{ t("views.download.downloads") }}
+                  </span>
                 </li>
               </ul>
             </div>
@@ -221,6 +249,7 @@ const fetchBuilds = async () => {
               <a :href="downloadRelease.author.html_url">
                 <div>
                   <img
+                    alt="Author avatar"
                     :src="downloadRelease.author.avatar_url"
                     class="w-16 h-16 inline-block"
                   />

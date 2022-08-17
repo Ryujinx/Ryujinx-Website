@@ -6,5 +6,11 @@
   "notSupported": "Currently not supported",
   "supportPlanned": "Support planned",
   "supportWindows": "Support Windows 8.1, 10 & 11",
-  "supportLinux": "Support for most common distros."
+  "supportLinux": "Support for most common distros",
+  "buildInformation": "Build information",
+  "buildRelease": "This build was released on {0}",
+  "branch": "branch",
+  "assets": "assets",
+  "downloads": "downloads",
+  "tag": "Tag"
 }
