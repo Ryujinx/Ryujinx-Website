@@ -1,8 +1,9 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useI18n } from "vue-i18n";
-import { ref, onMounted } from "vue";
+import { computed, onMounted, ref } from "vue";
 import axios from "axios";
 import dayjs from "dayjs";
+import { CogIcon } from "@heroicons/vue/solid";
 
 import { DownloadRelease } from "@/types";
 
@@ -16,10 +17,18 @@ onMounted(() => {
   fetchBuilds();
 });
 
+const totalDownload = computed(() => {
+  let total = 0;
+
+  downloadRelease.value?.assets.forEach(a => total += a.download_count);
+
+  return total;
+});
+
 const fetchBuilds = async () => {
   try {
     const result = await axios.get<DownloadRelease>(
-      import.meta.env.VITE_RELEASE_URL
+      import.meta.env.VITE_RELEASE_URL,
     );
     downloadRelease.value = result.data;
 
@@ -41,13 +50,13 @@ const fetchBuilds = async () => {
         <!-- Heading -->
         <div class="text-center">
           <i18n-t
+            class="text-3xl md:text-4xl font-extrabold mb-4"
             keypath="views.download.title1"
             tag="h2"
-            class="text-3xl md:text-4xl font-extrabold mb-4"
           >
             <span
               class="bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-red-500"
-              >{{ t("views.download.title2") }}</span
+            >{{ t("views.download.title2") }}</span
             >
           </i18n-t>
           <div class="w-12 h-1.5 bg-gray-200 rounded-lg mb-3 mx-auto"></div>
@@ -65,8 +74,8 @@ const fetchBuilds = async () => {
         >
           <!-- Windows -->
           <a
-            href="javascript:void(0)"
             class="group relative p-4 lg:p-6 bg-white rounded-xl transition duration-150 shadow-md shadow-gray-100"
+            href="javascript:void(0)"
           >
             <div
               class="absolute inset-0 bg-white rounded-xl shadow-md shadow-gray-200 transition duration-100 scale-100 opacity-0 group-hover:opacity-100 group-hover:scale-105 group-active:scale-100 group-active:opacity-0"
@@ -79,8 +88,8 @@ const fetchBuilds = async () => {
               </div>
               <div class="relative w-12 mb-8 text-indigo-500 mx-auto">
                 <img
-                  src="/assets/images/icons/windows.png"
                   alt="windows logo"
+                  src="/assets/images/icons/windows.png"
                 />
               </div>
               <h4 class="text-lg font-semibold mb-1 text-gray-900">Windows</h4>
@@ -97,8 +106,8 @@ const fetchBuilds = async () => {
 
           <!-- Linux -->
           <a
-            href="javascript:void(0)"
             class="group relative p-4 lg:p-6 bg-white rounded-xl transition duration-150 shadow-md shadow-gray-100"
+            href="javascript:void(0)"
           >
             <div
               class="absolute inset-0 bg-white rounded-xl shadow-md shadow-gray-200 transition duration-100 scale-100 opacity-0 group-hover:opacity-100 group-hover:scale-105 group-active:scale-100 group-active:opacity-0"
@@ -110,7 +119,7 @@ const fetchBuilds = async () => {
                 {{ downloadRelease.tag_name }}
               </div>
               <div class="relative w-12 mb-8 text-indigo-500 mx-auto">
-                <img src="/assets/images/icons/linux.png" alt="linux logo" />
+                <img alt="linux logo" src="/assets/images/icons/linux.png" />
               </div>
               <h4 class="text-lg font-semibold mb-1 text-gray-900">Linux</h4>
               <p class="leading-relaxed text-gray-500 text-sm font-medium">
@@ -138,7 +147,7 @@ const fetchBuilds = async () => {
                 {{ t("views.download.supportPlanned") }}
               </div>
               <div class="relative w-12 mb-8 text-indigo-500 mx-auto">
-                <img src="/assets/images/icons/macos.png" alt="macos logo" />
+                <img alt="macos logo" src="/assets/images/icons/macos.png" />
               </div>
               <h4 class="text-lg font-semibold mb-1 text-gray-900">macOS</h4>
               <div
@@ -165,7 +174,7 @@ const fetchBuilds = async () => {
             </p>
             <h5 class="flex items-center my-8">
               <span
-                class="text-sm uppercase tracking-wide text-indigo-600 font-semibold mr-3"
+                class="text-sm uppercase tracking-wide text-blue-600 font-semibold mr-3"
               >
                 GitHub
               </span>
@@ -174,103 +183,33 @@ const fetchBuilds = async () => {
                 class="grow bg-indigo-50 rounded h-0.5"
               ></span>
             </h5>
+
+            <!-- Github Info -->
             <div
               class="lg:flex lg:space-x-12 space-y-4 lg:space-y-0 font-medium"
             >
               <ul class="space-y-4 text-sm">
+                <!-- Branch -->
                 <li class="flex items-center space-x-2">
-                  <svg
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="text-emerald-500 hi-solid hi-check-circle inline-block w-5 h-5"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span> <strong>300+</strong> UI Components </span>
+                  <CogIcon class="text-sky-500 inline-block w-5 h-5" />
+                  <span> <span class="font-bold uppercase">{{ downloadRelease.target_commitish }}</span> branch </span>
                 </li>
+
+                <!-- Assets -->
                 <li class="flex items-center space-x-2">
-                  <svg
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="text-emerald-500 hi-solid hi-check-circle inline-block w-5 h-5"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span> <strong>200</strong> Paying Clients </span>
+                  <CogIcon class="text-sky-500 inline-block w-5 h-5" />
+                  <span> <span class="font-bold uppercase">{{ downloadRelease.assets.length }}</span> builds </span>
                 </li>
               </ul>
+
               <ul class="space-y-4 text-sm">
                 <li class="flex items-center space-x-2">
-                  <svg
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="text-emerald-500 hi-solid hi-check-circle inline-block w-5 h-5"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span> <strong>100GB</strong> SSD Storage </span>
+                  <CogIcon class="text-sky-500 inline-block w-5 h-5" />
+                  <span> Tag : <strong>{{ downloadRelease.tag_name }}</strong></span>
                 </li>
                 <li class="flex items-center space-x-2">
-                  <svg
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="text-emerald-500 hi-solid hi-check-circle inline-block w-5 h-5"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span> <strong>Custom</strong> Editors </span>
-                </li>
-              </ul>
-              <ul class="space-y-4 text-sm">
-                <li class="flex items-center space-x-2">
-                  <svg
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="text-emerald-500 hi-solid hi-check-circle inline-block w-5 h-5"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span> <strong>Builder</strong> Access </span>
-                </li>
-                <li class="flex items-center space-x-2">
-                  <svg
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="text-emerald-500 hi-solid hi-check-circle inline-block w-5 h-5"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  <span> <strong>24/7</strong> Email Support </span>
+                  <CogIcon class="text-sky-500 inline-block w-5 h-5" />
+                  <span> <strong>{{ totalDownload }}</strong> downloads </span>
                 </li>
               </ul>
             </div>
@@ -282,8 +221,8 @@ const fetchBuilds = async () => {
               <a :href="downloadRelease.author.html_url">
                 <div>
                   <img
-                    class="w-16 h-16 inline-block"
                     :src="downloadRelease.author.avatar_url"
+                    class="w-16 h-16 inline-block"
                   />
                 </div>
                 <div
