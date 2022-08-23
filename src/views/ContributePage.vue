@@ -68,11 +68,6 @@ const PATREON_URL = import.meta.env.VITE_PATREON_URL;
           <h2 class="text-3xl md:text-4xl font-extrabold mb-4">
             {{ t("views.contribute.titleContribute") }}
           </h2>
-          <h3
-            class="text-lg md:text-xl md:leading-relaxed font-medium text-gray-600 lg:w-2/3 mx-auto"
-          >
-            {{ t("views.contribute.titleSubContribute") }}
-          </h3>
         </div>
 
         <!-- Features -->

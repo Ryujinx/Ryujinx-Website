@@ -1,9 +1,8 @@
 {
   "title1": "Help us to build the {0}",
   "title2": "best switch emulator",
-  "subTitle": "Created by a passionate team. Ryujinx is in active development and needs your help to keep it going.",
+  "subTitle": "Created by a passionate team. Ryujinx is in active development and any help is appreciated to keep it going.",
   "titleContribute": " How may I contribute?",
-  "titleSubContribute": "You can support us through Patreon or you can help us with the development",
   "areaDevTitle": "Helping With Development",
   "areaDevDescription": "If you have experience in C#, Switch Homebrew, graphic/website design, software quality assurance or beta testing, Discord management, or any other skills you think may be useful in helping the Ryujinx project, please contact us at our Discord server.",
   "joinDiscord": "Join our Discord",
