@@ -180,6 +180,7 @@ const onClick = () => {
     :type="type"
     :disabled="disabled"
     :class="componentClass"
+    target="_blank"
     @click="onClick"
   >
     <slot name="loading-icon">

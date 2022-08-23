@@ -11,8 +11,9 @@ import {
 
 import { DownloadRelease } from "@/types";
 
-const GUIDE_URL = import.meta.env.VITE_GUIDE_URL;
-const LDN_BUILD_URL = import.meta.env.VITE_LDN_BUILD_URL;
+const GUIDE_URL = import.meta.env.VITE_GUIDE_URL as string;
+const LDN_BUILD_URL = import.meta.env.VITE_LDN_BUILD_URL as string;
+const OLDER_BUILD_URL = import.meta.env.VITE_OLDER_BUILDS_URL as string;
 const { t } = useI18n();
 const isLoading = ref(true);
 const downloadRelease = ref<DownloadRelease>({} as DownloadRelease);
@@ -38,6 +39,7 @@ const fetchBuilds = async () => {
     );
     downloadRelease.value = result.data;
 
+    console.log(result.data);
     downloadRelease.value?.assets.forEach((asset) => {
       if (asset.name.endsWith("win_x64.zip")) {
         windowBuildUrl.value = asset.browser_download_url;
@@ -182,8 +184,14 @@ const fetchBuilds = async () => {
           <div class="space-y-10">
             <!-- Heading -->
             <div class="text-center">
-              <i18n-t class="text-2xl md:text-2xl font-extrabold mb-4" tag="h2" keypath="views.download.ldnBuildTitle">
-                <span class="text-sky-600">{{ t("views.download.ldnBuild") }}</span>
+              <i18n-t
+                class="text-2xl md:text-2xl font-extrabold mb-4"
+                tag="h2"
+                keypath="views.download.ldnBuildTitle"
+              >
+                <span class="text-sky-600">{{
+                  t("views.download.ldnBuild")
+                }}</span>
               </i18n-t>
               <h3
                 class="text-lg md:text-xl md:leading-relaxed font-medium text-gray-600"
@@ -195,16 +203,19 @@ const fetchBuilds = async () => {
             <div
               class="flex flex-col sm:flex-row sm:items-center sm:justify-center space-y-4 sm:space-y-0 sm:space-x-2"
             >
-              <a
+              <GButton
                 :href="LDN_BUILD_URL"
-                class="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none px-6 py-4 leading-6 rounded border-gray-200 bg-gray-200 text-gray-700 hover:text-gray-700 hover:bg-gray-300 hover:border-gray-300 focus:ring focus:ring-gray-500 focus:ring-opacity-25 active:bg-gray-200 active:border-gray-200"
-                target="_blank"
+                rounded
+                variant="light-gray"
+                size="elg"
               >
-                <InformationCircleIcon
-                  class="opacity-50 hi-solid hi-information-circle inline-block w-5 h-5"
-                />
-                <span>{{ t("views.download.learnMore") }}</span>
-              </a>
+                <template #icon>
+                  <InformationCircleIcon
+                    class="opacity-50 hi-solid hi-information-circle inline-block w-5 h-5"
+                  />
+                </template>
+                {{ t("views.download.learnMore") }}
+              </GButton>
             </div>
           </div>
         </div>
@@ -275,14 +286,32 @@ const fetchBuilds = async () => {
                 </li>
               </ul>
               <div>
-                <a
+                <GButton
                   :href="downloadRelease.html_url"
-                  class="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none w-full px-4 py-3 leading-6 rounded border-sky-700 bg-sky-700 text-white hover:text-white hover:bg-sky-800 hover:border-sky-800 focus:ring focus:ring-sky-500 focus:ring-opacity-50 active:bg-sky-700 active:border-sky-700"
-                  target="_blank"
+                  rounded
+                  variant="sky"
+                  size="lg"
+                  extra-class="space-x-2 w-full"
                 >
-                  <ExternalLinkIcon class="opacity-50 inline-block w-5 h-5" />
-                  <span>{{ t("views.download.manualDownload") }}</span>
-                </a>
+                  <template #icon>
+                    <ExternalLinkIcon class="opacity-50 inline-block w-5 h-5" />
+                  </template>
+                  {{ t("views.download.manualDownload") }}
+                </GButton>
+              </div>
+              <div>
+                <GButton
+                  :href="OLDER_BUILD_URL"
+                  rounded
+                  variant="grey"
+                  size="lg"
+                  extra-class="space-x-2 w-full"
+                >
+                  <template #icon>
+                    <ExternalLinkIcon class="opacity-50 inline-block w-5 h-5" />
+                  </template>
+                  {{ t("views.download.olderBuilds") }}
+                </GButton>
               </div>
             </div>
           </div>
