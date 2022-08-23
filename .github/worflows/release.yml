@@ -1,0 +1,32 @@
+name: Create release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version (ex 1.0.1)'
+        required: true
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Copy Repo Files
+        uses: actions/checkout@v3
+
+      - name: Merge main -> production
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: main
+          target_branch: production
+          github_token: ${{ github.token }}
+
+  publish:
+    steps:
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ github.event.inputs.version }}
+          body: Please refer to [CHANGELOG.md](https://github.com/Acces-sh/daemon/blob/main/CHANGELOG.md) for details.
+          token: ${{ secrets.CR_PAT }}

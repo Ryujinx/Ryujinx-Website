@@ -1,6 +1,6 @@
 # Release Notes
 
-## v3.0.0 (XX/08/2022)
+## v3.0.0 (23/08/2022)
 
 ### Features
 
