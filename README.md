@@ -30,7 +30,7 @@ To start working on the Daemon, you can build the main branch:
 
 1. Clone the repo: `https://github.com/Ryujinx/Ryujinx-Website.git` or fork it and cd into.
 2. Restore project's dependencies : `npm install`
-3. Run website with 'npm run dev'
+3. Run website with `npm run dev`
 
 ### Compiles and hot-reloads for development
 

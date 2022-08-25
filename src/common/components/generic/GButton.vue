@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineEmits, defineProps, PropType } from "vue";
+import { computed, defineEmits, defineProps } from "vue";
 import { RouteLocationRaw } from "vue-router/dist/vue-router";
 import { RefreshIcon } from "@heroicons/vue/outline";
 
