@@ -28,5 +28,5 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ github.event.inputs.version }}
-          body: Please refer to [CHANGELOG.md](https://github.com/Acces-sh/daemon/blob/main/CHANGELOG.md) for details.
+          body: Please refer to [CHANGELOG.md](https://github.com/Ryujinx/Ryujinx-Website/blob/main/CHANGELOG.md) for details.
           token: ${{ secrets.CR_PAT }}
