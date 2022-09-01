@@ -14,14 +14,6 @@ jobs:
       - name: Copy Repo Files
         uses: actions/checkout@v3
 
-      - name: Merge main -> production
-        uses: devmasx/merge-branch@master
-        with:
-          type: now
-          from_branch: main
-          target_branch: production
-          github_token: ${{ github.token }}
-
   publish:
     steps:
       - name: Create release
