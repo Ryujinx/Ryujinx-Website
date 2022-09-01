@@ -39,12 +39,13 @@ const fetchBuilds = async () => {
     );
     downloadRelease.value = result.data;
 
-    console.log(result.data);
     downloadRelease.value?.assets.forEach((asset) => {
-      if (asset.name.endsWith("win_x64.zip")) {
-        windowBuildUrl.value = asset.browser_download_url;
-      } else if (asset.name.endsWith("linux_x64.tar.gz")) {
-        linuxBuildUrl.value = asset.browser_download_url;
+      if (asset.name.startsWith("ryujinx")) {
+        if (asset.name.endsWith("win_x64.zip")) {
+          windowBuildUrl.value = asset.browser_download_url;
+        } else if (asset.name.endsWith("linux_x64.tar.gz")) {
+          linuxBuildUrl.value = asset.browser_download_url;
+        }
       }
     });
   } catch (err) {
