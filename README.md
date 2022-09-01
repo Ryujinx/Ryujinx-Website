@@ -14,11 +14,32 @@
         <img src="https://img.shields.io/discord/410208534861447168?color=5865F2&label=Ryujinx&logo=discord&logoColor=white"
             alt="Discord">
     </a>
+    <a title="Crowdin" target="_blank" href="https://crowdin.com/project/ryujinx-website">
+        <img src="https://badges.crowdin.net/ryujinx-website/localized.svg" alt="translation status">
+    </a>
 </p>
 
 ## Changelog
 
 The complete list of changes is available [here](CHANGELOG.md)
+
+## Contribute
+
+### Translation 
+
+Currently, we need you to help us translate the website.
+Future languages to be added:
+- French
+- German
+- Dutch
+- Portuguese
+- Spanish
+
+Follow this link to participate in the translation (via Crowdin): https://crwd.in/ryujinx-website
+
+### Development
+
+We do encourage you talk to some devs in #development (on our Discord) before developing any PRs so we can make sure you aren't conflicting with another dev's plans, and so we can help you get accustomed to our code base and methods.
 
 ## Building
 
