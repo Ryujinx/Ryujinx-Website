@@ -1,12 +1,12 @@
 {
   "title1": "Help us to build the {0}",
-  "title2": "best switch emulator",
-  "subTitle": "Created by a passionate team. Ryujinx is in active development and any help is appreciated to keep it going.",
-  "titleContribute": " How may I contribute?",
+  "title2": "best Switch emulator",
+  "subTitle": "Created by gdkchan and actively developed by a passionate team.",
+  "titleContribute": "How may I contribute?",
   "areaDevTitle": "Helping With Development",
-  "areaDevDescription": "If you have experience in C#, Switch Homebrew, graphic/website design, software quality assurance or beta testing, Discord management, or any other skills you think may be useful in helping the Ryujinx project, please contact us at our Discord server.",
+  "areaDevDescription": "If you have experience in C#, Switch Homebrew, graphic/website design, software quality assurance or beta testing, Discord management, or any other skills that could be useful in helping the Ryujinx project, please contact us at our Discord server.",
   "joinDiscord": "Join our Discord",
   "becomePatron": "Become a Patron",
   "areaDonationTitle": "Helping With Donations",
-  "areaDonationDescription": "If you can't help out with development experience, there are other ways to support us. Whilst monetary donations are by no means required, we do appreciate them. They'll go towards necessary equipment and the likes. In return, there are some rewards that you will receive as a supporter (for example access to a patreon-only text channel on our Discord)."
+  "areaDonationDescription": "Not a developer? There are other ways to support us! Monetary donations are by no means required; however, they help offset the cost of necessary hardware, development software licenses, server costs, and the like. In return, Patreon supporters get some special perks(for example, access to a patreon-only support channel on our Discord)."
 }
