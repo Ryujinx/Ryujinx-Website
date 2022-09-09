@@ -69,7 +69,9 @@ npm run build
 
 This repo use Semantic Versioning (SemVer) : https://semver.org/
 
-Maintainer : Don't forget to update the [CHANGELOG.md](CHANGELOG.md) file after several changes.
+Maintainer : 
+- Don't forget to update the [CHANGELOG.md](CHANGELOG.md) file after several changes.
+- Update the translation file within Crowdin after each PR.
 
 ## Contact
 
