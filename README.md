@@ -1,8 +1,8 @@
-<h1 style="text-align:center">
+<h1 align="center">
   <br>
   <a href="https://ryujinx.org/"><img src="https://i.imgur.com/WcCj6Rt.png" alt="Ryujinx" width="150"></a>
   <br>
-  <b>Ryujinx website</b>
+  <b>Ryujinx</b>
   <br>
   <sub><sup><b>(REE-YOU-JINX)</b></sup></sub>
   <br>
@@ -47,7 +47,7 @@ To build the website you need:
 
 - [nodejs](https://nodejs.org/en/) v16.x
 
-To start working on the Daemon, you can build the main branch:
+To start working on the website, you can build the main branch:
 
 1. Clone the repo: `https://github.com/Ryujinx/Ryujinx-Website.git` or fork it and cd into.
 2. Restore project's dependencies : `npm install`
@@ -64,6 +64,12 @@ npm run dev
 ```
 npm run build
 ```
+
+### Versioning
+
+This repo use Semantic Versioning (SemVer) : https://semver.org/
+
+Maintainer : Don't forget to update the [CHANGELOG.md](CHANGELOG.md) file after several changes.
 
 ## Contact
 
