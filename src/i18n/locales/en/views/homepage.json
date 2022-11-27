@@ -7,7 +7,7 @@
   "openSourceDescription": "The source code of the emulator is available on {0}.",
   "github": "GitHub",
   "crossPlatform": "Cross-platform",
-  "crossPlatformDescription": "Ryujinx is currently available for Windows 10/11 and Linux-based systems (macOS support is planned).",
+  "crossPlatformDescription": "Ryujinx is currently available for Windows 10/11, macOS and Linux-based systems.",
   "compatibility": "Compatibility",
   "compatibilityDescription": "Ryujinx has been tested on over 3,600 titles, approximately 2,700 of those being considered playable.",
   "support": "Support",
