@@ -230,7 +230,7 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
             <dl
               class="space-y-1 px-5 py-12 hover:bg-gray-50 hover:bg-opacity-50"
             >
-              <dt class="text-4xl font-extrabold text-sky-600">12,5k+</dt>
+              <dt class="text-4xl font-extrabold text-sky-600">14,9k+</dt>
               <dd class="text-sm uppercase tracking-wide font-semibold">
                 {{ t("views.homepage.githubStar") }}
               </dd>
@@ -238,7 +238,7 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
             <dl
               class="space-y-1 px-5 py-12 hover:bg-gray-50 hover:bg-opacity-50"
             >
-              <dt class="text-4xl font-extrabold text-sky-600">2,5k+</dt>
+              <dt class="text-4xl font-extrabold text-sky-600">3,2k+</dt>
               <dd class="text-sm uppercase tracking-wide font-semibold">
                 {{ t("views.homepage.playableGames") }}
               </dd>
@@ -246,7 +246,7 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
             <dl
               class="space-y-1 px-5 py-12 hover:bg-gray-50 hover:bg-opacity-50"
             >
-              <dt class="text-4xl font-extrabold text-sky-600">450+</dt>
+              <dt class="text-4xl font-extrabold text-sky-600">500+</dt>
               <dd class="text-sm uppercase tracking-wide font-semibold">
                 {{ t("views.homepage.patreonContributors") }}
               </dd>
