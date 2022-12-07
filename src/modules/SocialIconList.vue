@@ -5,6 +5,7 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
 <template>
   <a
     href="https://twitter.com/RyujinxEmu"
+    target="_blank"
     class="text-gray-400 hover:text-sky-400"
   >
     <svg
@@ -21,6 +22,7 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
   <!-- Github -->
   <a
     href="https://github.com/Ryujinx/Ryujinx"
+    target="_blank"
     class="text-gray-400 hover:text-sky-400"
   >
     <svg
@@ -37,6 +39,7 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
   <!-- Discord -->
   <a
     :href="DISCORD_URL"
+    target="_blank"
     class="text-gray-400 hover:text-sky-400"
   >
     <svg
@@ -55,6 +58,7 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
   <!-- Patreon -->
   <a
     href="https://patreon.com/Ryujinx"
+    target="_blank"
     class="text-gray-400 hover:text-sky-400"
   >
     <svg class="inline-block w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M512 194.8c0 101.3-82.4 183.8-183.8 183.8-101.7 0-184.4-82.4-184.4-183.8 0-101.6 82.7-184.3 184.4-184.3C429.6 10.5 512 93.2 512 194.8zM0 501.5h90v-491H0v491z"/></svg>
