@@ -9,7 +9,7 @@
   "crossPlatform": "Cross-platform",
   "crossPlatformDescription": "Ryujinx is currently available for Windows 10/11, macOS and Linux-based systems.",
   "compatibility": "Compatibility",
-  "compatibilityDescription": "Ryujinx has been tested on over 3,600 titles, approximately 2,700 of those being considered playable.",
+  "compatibilityDescription": "Ryujinx has been tested on over 4,050 titles, approximately 3,400 of those being considered playable.",
   "support": "Support",
   "supportDescription": "Need help? Join the {0} to get support as well as converse with fellow switch emulation enthusiasts and team developers.",
   "discord": "Ryujinx Discord server",
