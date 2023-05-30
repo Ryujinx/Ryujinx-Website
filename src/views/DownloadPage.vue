@@ -17,7 +17,6 @@ const OLDER_BUILD_URL = import.meta.env.VITE_OLDER_BUILDS_URL as string;
 const { t } = useI18n();
 const isLoading = ref(true);
 const downloadRelease = ref<DownloadRelease>({} as DownloadRelease);
-const downloadMacOSRelease = ref<DownloadRelease>({} as DownloadRelease);
 const macosBuildUrl = ref("");
 const linuxBuildUrl = ref("");
 const windowBuildUrl = ref("");
@@ -48,27 +47,16 @@ const fetchBuilds = async () => {
           windowBuildUrl.value = asset.browser_download_url;
         } else if (asset.name.endsWith("linux_x64.tar.gz")) {
           linuxBuildUrl.value = asset.browser_download_url;
+        } 
+      } else if (asset.name.startsWith("test-ava-ryujinx")) {
+        if (asset.name.endsWith(".app.tar.gz")) {
+          macosBuildUrl.value = asset.browser_download_url;
         }
       }
     });
   } catch (err) {
     console.error(err);
   }
-
-  try {
-    const result = await axios.get<DownloadRelease>(
-      import.meta.env.VITE_RELEASE_MACOS_URL
-    );
-
-    downloadMacOSRelease.value = result.data;
-    downloadMacOSRelease.value?.assets.forEach((asset) => {
-      if (asset.name.toLowerCase().startsWith("ryujinx")) {
-        if (asset.name.endsWith(".app.tar.gz")) {
-          macosBuildUrl.value = asset.browser_download_url;
-        }
-      }
-    });
-  } catch (err) {}
 
   isLoading.value = false;
 };
@@ -183,7 +171,7 @@ const fetchBuilds = async () => {
               <div
                 class="text-xs uppercase text-gray-400 font-semibold tracking-wider mb-4"
               >
-                {{ downloadMacOSRelease.tag_name }}
+                {{ downloadRelease.tag_name }}
               </div>
               <div class="relative w-12 mb-8 text-indigo-500 mx-auto">
                 <img alt="macos logo" src="/assets/images/icons/macos.png" />
