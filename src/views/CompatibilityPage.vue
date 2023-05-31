@@ -7,7 +7,7 @@ import { Doughnut } from "vue-chartjs";
 import { Chart, ArcElement, Title, Legend, Tooltip, Colors, ChartData, ChartOptions, elements } from 'chart.js'
 
 Chart.register(ArcElement, Title, Legend, Tooltip, Colors);
-Tooltip.positioners.mousePosition = function(elements, eventPosition) {
+Tooltip.positioners.cursor = function(elements, eventPosition) {
   return {
     x: eventPosition.x,
     y: eventPosition.y
@@ -146,7 +146,7 @@ const chartOptions = {
     },
     tooltip: {
       usePointStyle: true,
-      position: 'mousePosition',
+      position: "cursor" as const,
       bodyFont: {
         family: "Inter",
         size: 12
@@ -157,7 +157,7 @@ const chartOptions = {
       }
     }
   },
-  onClick: (e, activeEls) => {
+  onClick: (e: any, activeEls: any) => {
     let datasetIndex = activeEls[0].datasetIndex;
     let dataIndex = activeEls[0].index;
     let value = e.chart.data.datasets[datasetIndex].data[dataIndex];
