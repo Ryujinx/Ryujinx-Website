@@ -13,35 +13,35 @@ const { t } = useI18n();
 const tierData = ref<PlayableTier[]>([
   {
     labelName: "status-playable",
-    displayName: "playable",
+    localeKey: "playable",
     // Tailwind Emerald-600
     color: "#059669",
     count: 0
   },
   {
     labelName: "status-ingame",
-    displayName: "ingame",
+    localeKey: "ingame",
     // Tailwind Lime-600
     color: "#65a30d",
     count: 0
   },
   {
     labelName: "status-menus",
-    displayName: "menus",
+    localeKey: "menus",
     // Tailwind Yellow-600  
     color: "#ca8a04",
     count: 0
   },
   {
     labelName: "status-boots",
-    displayName: "boots",
+    localeKey: "boots",
     // Tailwind Orange-600
     color: "#ea580c",
     count: 0
   },
   {
     labelName: "status-nothing",
-    displayName: "nothing",
+    localeKey: "nothing",
     // Tailwind Red-600
     color: "#dc2626",
     count: 0
@@ -54,7 +54,7 @@ onMounted(() => {
 
 interface PlayableTier {
   labelName: string;
-  displayName: string;
+  localeKey: string;
   color: string;
   count: number;
 }
@@ -87,7 +87,7 @@ function getWithExpiry(key: string): PlayableTier[] {
 
 function setData() {
   chartData.value = ({
-    labels: tierData.value.flatMap((tier) => tier.displayName),
+    labels: tierData.value.flatMap((tier) => t(`views.compatibility.${tier.localeKey}`)),
     datasets: [
       {
         data: tierData.value.flatMap((tier) => tier.count),
@@ -106,8 +106,6 @@ const fetchStats = async () => {
           `${import.meta.env.VITE_LABEL_SEARCH_URL}label:${tier.labelName}+state:open`
         );
 
-        tier.displayName = t("view.compatibility." + tier.displayName);
-        console.log(t("view.compatibility.playable"));
         tier.count = result.data.total_count;
       }));
 
@@ -137,7 +135,7 @@ const chartOptions = {
         usePointStyle: true,
         font: {
           family: "Inter",
-          size: 12
+          size: 16
         }
       }
     }
@@ -158,7 +156,9 @@ const chartOptions = {
     </div>
 
     <div class="container flex justify-center">
-      <Doughnut :data="chartData" :options="chartOptions"/>
+      <div class="lg:w-1/2">
+        <Doughnut :data="chartData" :options="chartOptions"/>
+      </div>
     </div>
   </div>
 </template>
