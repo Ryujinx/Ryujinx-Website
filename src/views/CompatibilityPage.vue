@@ -4,17 +4,10 @@ import axios from "axios";
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { Doughnut } from "vue-chartjs";
-import { Chart, ArcElement, Title, Legend, Tooltip, Colors, ChartData, ChartOptions, elements } from 'chart.js'
-
-Chart.register(ArcElement, Title, Legend, Tooltip, Colors);
-Tooltip.positioners.cursor = function(elements, eventPosition) {
-  return {
-    x: eventPosition.x,
-    y: eventPosition.y
-  };
-}
+import { Chart, ArcElement, Title, Legend, Tooltip, Colors, ChartData } from 'chart.js'
 
 const { t } = useI18n();
+const STATS_KEY = "git-stats";
 const tierData = ref<PlayableTier[]>([
   {
     labelName: "status-playable",
@@ -52,10 +45,6 @@ const tierData = ref<PlayableTier[]>([
     count: 0
   },
 ]);
-
-onMounted(() => {
-  fetchStats();
-});
 
 interface PlayableTier {
   labelName: string;
@@ -103,7 +92,7 @@ function setData() {
 }
 
 const fetchStats = async () => {
-  var stats = getWithExpiry("git-stats");
+  var stats = getWithExpiry(STATS_KEY);
   if (stats.length == 0) {
     try {
       await Promise.all(tierData.value.map(async tier => {
@@ -114,7 +103,7 @@ const fetchStats = async () => {
         tier.count = result.data.total_count;
       }));
 
-      setWithExpiry("git-stats", tierData.value, 10);
+      setWithExpiry(STATS_KEY, tierData.value, 10);
       setData();
     } catch (err) {
       console.error(err);
@@ -169,6 +158,17 @@ const chartOptions = {
   }
 }
 
+Chart.register(ArcElement, Title, Legend, Tooltip, Colors);
+Tooltip.positioners.cursor = function(elements, eventPosition) {
+  return {
+    x: eventPosition.x,
+    y: eventPosition.y
+  };
+}
+
+onMounted(() => {
+  fetchStats();
+});
 </script>
 
 <template>
