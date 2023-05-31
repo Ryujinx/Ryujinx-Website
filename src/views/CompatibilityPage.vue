@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { IssueSearch } from "@/types";
 import axios from "axios";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { Bar } from "vue-chartjs";
-import { Chart, CategoryScale, LinearScale, BarElement, Title, Legend, Tooltip, Colors, ChartData } from 'chart.js'
+import { Chart, CategoryScale, LinearScale, BarElement, Title, Legend, Tooltip, Colors, ChartData, ChartOptions } from 'chart.js'
 import { ChartDataset } from "chart.js";
 
 const { t } = useI18n();
@@ -97,7 +97,7 @@ const fetchStats = async () => {
     try {
       await Promise.all(tierData.value.map(async tier => {
         const result = await axios.get<IssueSearch>(
-          `${import.meta.env.VITE_LABEL_SEARCH_URL}label:${tier.labelName}+state:open`
+          `${import.meta.env.VITE_LABEL_SEARCH_URL}+label:${tier.labelName}`
         );
 
         tier.count = result.data.total_count;
@@ -120,10 +120,11 @@ const chartData = ref<ChartData<'bar'>>({
   datasets: []
 });
 
-const chartOptions = {
-  indexAxis: 'y' as const,
+const chartOptions = ref<ChartOptions<'bar'>>({
+  indexAxis: "y" as const,
   scales: {
     x: {
+      display: false,
       stacked: true,
     },
     y: {
@@ -132,9 +133,6 @@ const chartOptions = {
     }
   },
   plugins: {
-    legend: {
-      display: false,
-    },
     tooltip: {
       usePointStyle: true,
       position: "cursor" as const,
@@ -148,7 +146,15 @@ const chartOptions = {
       }
     },
   }
-};
+});
+
+const dynamicChartOptions = computed(() => {
+  const options = { ...chartOptions.value };
+  options.scales = { ...options.scales };
+  options.scales.x = { ...options.scales.x };
+  options.scales.x.max = Math.max(chartData.value.datasets.flatMap((value) => value.data));
+  return options;
+});
 
 Chart.register(CategoryScale, LinearScale, BarElement, Title, Legend, Tooltip, Colors);
 Tooltip.positioners.cursor = function(elements, eventPosition) {
@@ -161,17 +167,6 @@ Tooltip.positioners.cursor = function(elements, eventPosition) {
 onMounted(() => {
   fetchStats();
 })
-</script>
-
-<script lang="ts">
-export default {
-  mounted() {
-    var chart = this.$refs['chart'] as Chart<'bar'>;
-    console.log(chart);
-    console.log(chart.config);
-    // this.$refs.chart.chartOptions.scales.x.max = tierData.value.reduce((accumulator, tier) => accumulator + tier.count, 0);
-  }
-}
 </script>
 
 <template>
@@ -194,8 +189,8 @@ export default {
     </div>
 
     <div class="container flex justify-center">
-      <div class="relative lg:h-1/3">
-        <Bar ref="chart" :data="chartData" :options="chartOptions"/>
+      <div class="relative lg:h-1/3" lg:w-1vw>
+        <Bar ref="chart" :data="chartData" :options="dynamicChartOptions"/>
       </div>
     </div>
   </div>

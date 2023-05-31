@@ -43,7 +43,7 @@ function getLang() {
 const fetchStats = async () => {
   try {
     const result = await axios.get<IssueSearch>(
-      import.meta.env.VITE_LABEL_SEARCH_URL + "label:status-playable+state:open"
+      import.meta.env.VITE_LABEL_SEARCH_URL + "+label:status-playable"
     );
 
     issueSearch.value = result.data;
