@@ -1,7 +1,7 @@
 export type DownloadRelease = {
   assets: DownloadAsset[];
   assets_url: string;
-  author: ReleaseAuthor;
+  author: User;
   body: string;
   created_at: string;
   draft: boolean;
@@ -23,7 +23,7 @@ export type DownloadAsset = {
   browser_download_url: string;
   content_type: string;
   created_at: string;
-  download_count: 8
+  download_count: number;
   id: number;
   label: string;
   name: string;
@@ -34,12 +34,20 @@ export type DownloadAsset = {
   url: string;
 }
 
-export type ReleaseAuthor = {
+export type IssueSearch = {
+  total_count: number;
+}
+
+export type Repo = {
+  stargazers_count: number;
+}
+
+export type User = {
   avatar_url: string;
   events_url: string;
   followers_url: string;
   following_url: string;
-  gists_rk: string;
+  gists_url: string;
   gravatar_id: string;
   html_url: string;
   id: number;
