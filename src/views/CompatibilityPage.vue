@@ -169,6 +169,11 @@ const chartOptions = ref<ChartOptions<'bar'>>({
         }
       }
     }
+  },
+  onClick: (e, elements) => {
+    var index = tierData.value.length - elements[0].datasetIndex - 1;
+    var tier = tierData.value[index];
+    window.location.href = import.meta.env.VITE_LABEL_URL + tier.labelName;
   }
 });
 
