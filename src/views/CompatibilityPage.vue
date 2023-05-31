@@ -133,6 +133,22 @@ const chartOptions = ref<ChartOptions<'bar'>>({
   indexAxis: "y" as const,
   responsive: true,
   maintainAspectRatio: false,
+  transitions: {
+    show: {
+      animations: {
+        x: {
+          from: 0
+        }
+      }
+    },
+    hide: {
+      animations: {
+        x: {
+          to: 0
+        }
+      }
+    }
+  },
   scales: {
     x: {
       max: NaN,
