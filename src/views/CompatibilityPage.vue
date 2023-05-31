@@ -4,7 +4,7 @@ import axios from "axios";
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { Doughnut } from "vue-chartjs";
-import { Chart, ArcElement, Title, Legend, Tooltip, Colors, ChartData } from 'chart.js'
+import { Chart, ArcElement, Title, Legend, Tooltip, Colors, ChartData, ChartOptions, elements } from 'chart.js'
 
 Chart.register(ArcElement, Title, Legend, Tooltip, Colors);
 
@@ -13,31 +13,36 @@ const tierData = ref<PlayableTier[]>([
   {
     labelName: "status-playable",
     prettyPrintName: "Playable",
-    color: "green",
+    // Tailwind Emerald-600
+    color: "#059669",
     count: 0
   },
   {
     labelName: "status-ingame",
     prettyPrintName: "In-Game",
-    color: "yellow",
+    // Tailwind Lime-600
+    color: "#65a30d",
     count: 0
   },
   {
     labelName: "status-menus",
     prettyPrintName: "Menus",
-    color: "yellow",
+    // Tailwind Yellow-600  
+    color: "#ca8a04",
     count: 0
   },
   {
     labelName: "status-boots",
     prettyPrintName: "Boots",
-    color: "yellow",
+    // Tailwind Orange-600
+    color: "#ea580c",
     count: 0
   },
   {
     labelName: "status-nothing",
     prettyPrintName: "Nothing",
-    color: "red",
+    // Tailwind Red-600
+    color: "#dc2626",
     count: 0
   },
 ]);
@@ -81,6 +86,23 @@ const chartData = ref<ChartData<'doughnut'>>({
   datasets: []
 })
 
+const chartOptions = {
+  plugins: {
+    legend: {
+      reverse: true,
+      labels: {
+        color: "black",
+        padding: 20,
+        usePointStyle: true,
+        font: {
+          family: "Inter",
+          size: 12
+        }
+      }
+    }
+  }
+}
+
 </script>
 
 <template>
@@ -95,7 +117,7 @@ const chartData = ref<ChartData<'doughnut'>>({
     </div>
 
     <div class="container flex justify-center">
-      <Doughnut :data="chartData" />
+      <Doughnut :data="chartData" :options="chartOptions"/>
     </div>
   </div>
 </template>
