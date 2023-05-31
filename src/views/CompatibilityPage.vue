@@ -156,6 +156,16 @@ const chartOptions = {
         size: 14
       }
     }
+  },
+  onClick: (e, activeEls) => {
+    let datasetIndex = activeEls[0].datasetIndex;
+    let dataIndex = activeEls[0].index;
+    let value = e.chart.data.datasets[datasetIndex].data[dataIndex];
+    var tier = tierData.value.find((tier) => tier.count == value);
+
+    if (tier != null) {
+      window.location.href = import.meta.env.VITE_LABEL_URL + tier.labelName;
+    }
   }
 }
 
