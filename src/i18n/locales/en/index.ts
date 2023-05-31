@@ -4,6 +4,7 @@ import header from "./header.json";
 import homepage from "./views/homepage.json";
 import download from "./views/download.json";
 import contribute from "./views/contribute.json";
+import compatibility from "./views/compatibility.json";
 
 export const en = {
   navigations: navigations,
@@ -12,6 +13,7 @@ export const en = {
   views: {
     homepage: homepage,
     download: download,
-    contribute: contribute
+    contribute: contribute,
+    compatibility: compatibility
   },
 };

@@ -1,0 +1,9 @@
+{
+    "title": "Compatibility",
+    "description": "Ryujinx sure can play a lot of games",
+    "playable": "Playable",
+    "ingame": "In-Game",
+    "menus": "Menus",
+    "boots": "Boots",
+    "nothing": "Nothing"
+}

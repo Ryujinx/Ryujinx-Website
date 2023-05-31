@@ -5,6 +5,7 @@ import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { Doughnut } from "vue-chartjs";
 import { Chart, ArcElement, Title, Legend, Tooltip, Colors, ChartData, ChartOptions, elements } from 'chart.js'
+import { stat } from "fs";
 
 Chart.register(ArcElement, Title, Legend, Tooltip, Colors);
 
@@ -12,35 +13,35 @@ const { t } = useI18n();
 const tierData = ref<PlayableTier[]>([
   {
     labelName: "status-playable",
-    prettyPrintName: "Playable",
+    displayName: "playable",
     // Tailwind Emerald-600
     color: "#059669",
     count: 0
   },
   {
     labelName: "status-ingame",
-    prettyPrintName: "In-Game",
+    displayName: "ingame",
     // Tailwind Lime-600
     color: "#65a30d",
     count: 0
   },
   {
     labelName: "status-menus",
-    prettyPrintName: "Menus",
+    displayName: "menus",
     // Tailwind Yellow-600  
     color: "#ca8a04",
     count: 0
   },
   {
     labelName: "status-boots",
-    prettyPrintName: "Boots",
+    displayName: "boots",
     // Tailwind Orange-600
     color: "#ea580c",
     count: 0
   },
   {
     labelName: "status-nothing",
-    prettyPrintName: "Nothing",
+    displayName: "nothing",
     // Tailwind Red-600
     color: "#dc2626",
     count: 0
@@ -53,32 +54,72 @@ onMounted(() => {
 
 interface PlayableTier {
   labelName: string;
-  prettyPrintName: string;
+  displayName: string;
   color: string;
   count: number;
 }
 
-const fetchStats = async () => {
-  try {
-    await Promise.all(tierData.value.map(async tier => {
-      const result = await axios.get<IssueSearch>(
-        `${import.meta.env.VITE_LABEL_SEARCH_URL}label:${tier.labelName}+state:open`
-      );
+function setWithExpiry(key: string, value: PlayableTier[], ttl: number) {
+	const now = new Date()
 
-      tier.count = result.data.total_count;
-    }));
-    
-    chartData.value = ({
-      labels: tierData.value.flatMap((tier) => tier.prettyPrintName),
-      datasets: [
-        {
-          data: tierData.value.flatMap((tier) => tier.count),
-          backgroundColor: tierData.value.flatMap((tier) => tier.color),
-        }
-      ]
-    })
-  } catch (err) {
-    console.error(err);
+	const item = {
+		value: value,
+		expiry: now.getTime() + (ttl * 60 * 60 * 1000),
+	}
+	localStorage.setItem(key, JSON.stringify(item))
+}
+
+function getWithExpiry(key: string): PlayableTier[] {
+	const itemStr = localStorage.getItem(key)
+	if (!itemStr) {
+		return []
+	}
+
+	const item = JSON.parse(itemStr)
+	const now = new Date()
+	if (now.getTime() > item.expiry) {
+		localStorage.removeItem(key)
+		return []
+	}
+
+	return item.value
+}
+
+function setData() {
+  chartData.value = ({
+    labels: tierData.value.flatMap((tier) => tier.displayName),
+    datasets: [
+      {
+        data: tierData.value.flatMap((tier) => tier.count),
+        backgroundColor: tierData.value.flatMap((tier) => tier.color),
+      }
+    ]
+  })
+}
+
+const fetchStats = async () => {
+  var stats = getWithExpiry("git-stats");
+  if (stats.length == 0) {
+    try {
+      await Promise.all(tierData.value.map(async tier => {
+        const result = await axios.get<IssueSearch>(
+          `${import.meta.env.VITE_LABEL_SEARCH_URL}label:${tier.labelName}+state:open`
+        );
+
+        tier.displayName = t("view.compatibility." + tier.displayName);
+        console.log(t("view.compatibility.playable"));
+        tier.count = result.data.total_count;
+      }));
+
+      setWithExpiry("git-stats", tierData.value, 10);
+      setData();
+    } catch (err) {
+      console.error(err);
+    }
+  } else {
+    tierData.value = stats;
+
+    setData();
   }
 }
 
@@ -109,10 +150,10 @@ const chartOptions = {
   <div class="space-y-16 container xl:max-w-7xl mx-auto px-4 py-16 lg:px-8 lg:py-32">
     <div class="text-center">
       <h2 class="text-3xl md:text-4xl font-extrabold mb-4">
-        Compatibility
+        {{ t("views.compatibility.title") }}
       </h2>
       <h3 class="text-lg md:text-xl md:leading-relaxed font-medium text-gray-600 lg:w-2/3 mx-auto">
-        {{ t("views.homepage.ourTeamDescription") }}
+        {{ t("views.compatibility.description") }}
       </h3>
     </div>
 
