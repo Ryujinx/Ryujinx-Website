@@ -153,9 +153,11 @@ const chartOptions = ref<ChartOptions<'bar'>>({
         size: 12
       },
       titleFont: {
-        family: "Inter",
-        size: 14
-      }
+        size: 0
+      },
+      titleMarginBottom: 0,
+      xAlign: "center" as const,
+      yAlign: "bottom" as const,
     },
     legend: {
       labels: {
