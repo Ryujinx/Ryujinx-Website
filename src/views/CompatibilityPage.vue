@@ -3,8 +3,9 @@ import { IssueSearch } from "@/types";
 import axios from "axios";
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { Doughnut } from "vue-chartjs";
-import { Chart, ArcElement, Title, Legend, Tooltip, Colors, ChartData } from 'chart.js'
+import { Bar } from "vue-chartjs";
+import { Chart, CategoryScale, LinearScale, BarElement, Title, Legend, Tooltip, Colors, ChartData } from 'chart.js'
+import { ChartDataset } from "chart.js";
 
 const { t } = useI18n();
 const STATS_KEY = "git-stats";
@@ -79,15 +80,14 @@ function getWithExpiry(key: string): PlayableTier[] {
 	return item.value
 }
 
-function setData() {
+function setData(this: any) {
   chartData.value = ({
-    labels: tierData.value.flatMap((tier) => t(`views.compatibility.${tier.localeKey}`)),
-    datasets: [
-      {
-        data: tierData.value.flatMap((tier) => tier.count),
-        backgroundColor: tierData.value.flatMap((tier) => tier.color),
-      }
-    ]
+    labels: ["label"],
+    datasets: tierData.value.map((tier: PlayableTier): ChartDataset<'bar', number[]> => ({
+      data: [tier.count],
+      label: t(`views.compatibility.${tier.localeKey}`),
+      backgroundColor: tier.color
+    })).reverse(),
   })
 }
 
@@ -115,23 +115,25 @@ const fetchStats = async () => {
   }
 }
 
-const chartData = ref<ChartData<'doughnut'>>({
+const chartData = ref<ChartData<'bar'>>({
+  labels: [],
   datasets: []
-})
+});
 
 const chartOptions = {
+  indexAxis: 'y' as const,
+  scales: {
+    x: {
+      stacked: true,
+    },
+    y: {
+      display: false,
+      stacked: true
+    }
+  },
   plugins: {
     legend: {
-      reverse: true,
-      labels: {
-        color: "black",
-        padding: 20,
-        usePointStyle: true,
-        font: {
-          family: "Inter",
-          size: 16
-        }
-      }
+      display: false,
     },
     tooltip: {
       usePointStyle: true,
@@ -144,21 +146,11 @@ const chartOptions = {
         family: "Inter",
         size: 14
       }
-    }
-  },
-  onClick: (e: any, activeEls: any) => {
-    let datasetIndex = activeEls[0].datasetIndex;
-    let dataIndex = activeEls[0].index;
-    let value = e.chart.data.datasets[datasetIndex].data[dataIndex];
-    var tier = tierData.value.find((tier) => tier.count == value);
-
-    if (tier != null) {
-      window.location.href = import.meta.env.VITE_LABEL_URL + tier.labelName;
-    }
+    },
   }
-}
+};
 
-Chart.register(ArcElement, Title, Legend, Tooltip, Colors);
+Chart.register(CategoryScale, LinearScale, BarElement, Title, Legend, Tooltip, Colors);
 Tooltip.positioners.cursor = function(elements, eventPosition) {
   return {
     x: eventPosition.x,
@@ -168,12 +160,31 @@ Tooltip.positioners.cursor = function(elements, eventPosition) {
 
 onMounted(() => {
   fetchStats();
-});
+})
+</script>
+
+<script lang="ts">
+export default {
+  mounted() {
+    var chart = this.$refs['chart'] as Chart<'bar'>;
+    console.log(chart);
+    console.log(chart.config);
+    // this.$refs.chart.chartOptions.scales.x.max = tierData.value.reduce((accumulator, tier) => accumulator + tier.count, 0);
+  }
+}
 </script>
 
 <template>
   <div class="space-y-16 container xl:max-w-7xl mx-auto px-4 py-16 lg:px-8 lg:py-32">
     <div class="text-center">
+      <div class="flex-none relative">
+        <div
+          class="pattern-dots-xl opacity-10 absolute top-0 left-0 w-48 h-64 md:mt-20 transform"
+        ></div>
+      </div>
+      <div class="text-sm uppercase font-bold tracking-wider mb-1 text-blue-700">
+        {{ t("views.compatibility.subtitle") }}
+      </div>
       <h2 class="text-3xl md:text-4xl font-extrabold mb-4">
         {{ t("views.compatibility.title") }}
       </h2>
@@ -183,9 +194,22 @@ onMounted(() => {
     </div>
 
     <div class="container flex justify-center">
-      <div class="lg:w-1/2">
-        <Doughnut :data="chartData" :options="chartOptions"/>
+      <div class="relative lg:h-1/3">
+        <Bar ref="chart" :data="chartData" :options="chartOptions"/>
       </div>
+    </div>
+  </div>
+
+  <div class="bg-white">
+    <div class="space-y-16 container xl:max-w-7xl mx-auto px-4 py-16 lg:px-8 lg:py-32">
+      <div class="text-center">
+          <h2 class="text-3xl md:text-4xl font-extrabold mb-4">
+            {{t("views.compatibility.title2")}}
+          </h2>
+          <h3 class="text-lg md:text-xl md:leading-relaxed font-medium text-gray-600 lg:w-2/3 mx-auto">
+            {{t("views.compatibility.description2")}}
+          </h3>
+        </div>
     </div>
   </div>
 </template>
