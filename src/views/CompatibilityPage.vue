@@ -5,9 +5,14 @@ import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { Doughnut } from "vue-chartjs";
 import { Chart, ArcElement, Title, Legend, Tooltip, Colors, ChartData, ChartOptions, elements } from 'chart.js'
-import { stat } from "fs";
 
 Chart.register(ArcElement, Title, Legend, Tooltip, Colors);
+Tooltip.positioners.mousePosition = function(elements, eventPosition) {
+  return {
+    x: eventPosition.x,
+    y: eventPosition.y
+  };
+}
 
 const { t } = useI18n();
 const tierData = ref<PlayableTier[]>([
@@ -137,6 +142,18 @@ const chartOptions = {
           family: "Inter",
           size: 16
         }
+      }
+    },
+    tooltip: {
+      usePointStyle: true,
+      position: 'mousePosition',
+      bodyFont: {
+        family: "Inter",
+        size: 12
+      },
+      titleFont: {
+        family: "Inter",
+        size: 14
       }
     }
   }
