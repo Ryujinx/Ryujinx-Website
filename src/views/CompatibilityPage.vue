@@ -91,6 +91,15 @@ function setData(this: any) {
   })
 }
 
+function updateCanvasWidth() {
+  var canvas = document.getElementById('chart');
+  var screenWidth = window.innerWidth;
+  var canvasWidth = screenWidth * 0.6;
+  if (canvas) {
+    canvas.style.width = canvasWidth + 'px';
+  }
+}
+
 const fetchStats = async () => {
   var stats = getWithExpiry(STATS_KEY);
   if (stats.length == 0) {
@@ -122,8 +131,11 @@ const chartData = ref<ChartData<'bar'>>({
 
 const chartOptions = ref<ChartOptions<'bar'>>({
   indexAxis: "y" as const,
+  responsive: true,
+  maintainAspectRatio: false,
   scales: {
     x: {
+      max: NaN,
       display: false,
       stacked: true,
     },
@@ -145,17 +157,20 @@ const chartOptions = ref<ChartOptions<'bar'>>({
         size: 14
       }
     },
+    legend: {
+      labels: {
+        padding: 15,
+        color: "black",
+        usePointStyle: true,
+        font: {
+          family: "Inter",
+        }
+      }
+    }
   }
 });
 
-const dynamicChartOptions = computed(() => {
-  const options = { ...chartOptions.value };
-  options.scales = { ...options.scales };
-  options.scales.x = { ...options.scales.x };
-  options.scales.x.max = Math.max(chartData.value.datasets.flatMap((value) => value.data));
-  return options;
-});
-
+window.addEventListener('resize', updateCanvasWidth);
 Chart.register(CategoryScale, LinearScale, BarElement, Title, Legend, Tooltip, Colors);
 Tooltip.positioners.cursor = function(elements, eventPosition) {
   return {
@@ -166,6 +181,7 @@ Tooltip.positioners.cursor = function(elements, eventPosition) {
 
 onMounted(() => {
   fetchStats();
+  updateCanvasWidth();
 })
 </script>
 
@@ -190,7 +206,7 @@ onMounted(() => {
 
     <div class="container flex justify-center">
       <div class="relative lg:h-1/3" lg:w-1vw>
-        <Bar ref="chart" :data="chartData" :options="dynamicChartOptions"/>
+        <Bar id="chart" ref="chart" :data="chartData" :options="chartOptions"/>
       </div>
     </div>
   </div>
