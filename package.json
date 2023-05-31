@@ -7,29 +7,31 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.2.37",
-    "vue-router": "^4.1.3",
-    "vue-i18n": "^9.2.2",
     "@heroicons/vue": "^1.0.6",
     "axios": "^0.27.2",
-    "dayjs": "^1.11.5"
+    "chart.js": "^4.3.0",
+    "dayjs": "^1.11.5",
+    "vue": "^3.2.37",
+    "vue-chartjs": "^5.2.0",
+    "vue-i18n": "^9.2.2",
+    "vue-router": "^4.1.3"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.0.2",
-    "autoprefixer": "^10.4.8",
-    "postcss": "^8.4.16",
-    "tailwindcss": "^3.1.8",
-    "typescript": "^4.6.4",
-    "vite": "^3.0.6",
-    "vue-tsc": "^0.39.5",
-    "prettier": "^2.7.1",
-    "eslint": "^8.21.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-vue": "^9.3.0",
-    "@vue/eslint-config-typescript": "^11.0.0",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.2",
     "@tailwindcss/typography": "^0.5.4",
-    "@types/node": "16.11.48"
+    "@types/node": "16.11.48",
+    "@vitejs/plugin-vue": "^3.0.2",
+    "@vue/eslint-config-typescript": "^11.0.0",
+    "autoprefixer": "^10.4.8",
+    "eslint": "^8.21.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "postcss": "^8.4.16",
+    "prettier": "^2.7.1",
+    "tailwindcss": "^3.1.8",
+    "typescript": "^4.6.4",
+    "vite": "^3.0.6",
+    "vue-tsc": "^0.39.5"
   }
 }
