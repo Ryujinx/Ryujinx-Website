@@ -10,14 +10,14 @@ import { useI18n } from "vue-i18n";
 import TeamList from "@/modules/TeamList.vue";
 import { computed, onMounted, ref } from "vue";
 import axios from "axios";
-import { IssueSearch, Repo } from "@/types";
+import { Repo } from "@/types";
 
 const { t } = useI18n();
 const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
-const issueSearch = ref<IssueSearch>({} as IssueSearch);
+const issueSearch = ref<{[key: string]: number}>({});
 const repo = ref<Repo>({} as Repo);
 const playableGames = computed(() => {
-  return formatNumber(issueSearch.value?.total_count);
+  return formatNumber(issueSearch.value["status-playable"]);
 });
 const stars = computed(() => {
   return formatNumber(repo.value?.stargazers_count);
@@ -42,8 +42,8 @@ function getLang() {
 
 const fetchStats = async () => {
   try {
-    const result = await axios.get<IssueSearch>(
-      import.meta.env.VITE_LABEL_SEARCH_URL + "+label:status-playable"
+    const result = await axios.get<{[key: string]: number}>(
+      import.meta.env.VITE_STATS_URL
     );
 
     issueSearch.value = result.data;
