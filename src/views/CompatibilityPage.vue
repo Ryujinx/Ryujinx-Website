@@ -1,14 +1,12 @@
 <script lang="ts" setup>
-import { IssueSearch } from "@/types";
 import axios from "axios";
-import { computed, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { Bar } from "vue-chartjs";
 import { Chart, CategoryScale, LinearScale, BarElement, Title, Legend, Tooltip, Colors, ChartData, ChartOptions } from 'chart.js'
 import { ChartDataset } from "chart.js";
 
 const { t } = useI18n();
-const STATS_KEY = "git-stats";
 const tierData = ref<PlayableTier[]>([
   {
     labelName: "status-playable",
@@ -54,32 +52,6 @@ interface PlayableTier {
   count: number;
 }
 
-function setWithExpiry(key: string, value: PlayableTier[], ttl: number) {
-	const now = new Date()
-
-	const item = {
-		value: value,
-		expiry: now.getTime() + (ttl * 60 * 60 * 1000),
-	}
-	localStorage.setItem(key, JSON.stringify(item))
-}
-
-function getWithExpiry(key: string): PlayableTier[] {
-	const itemStr = localStorage.getItem(key)
-	if (!itemStr) {
-		return []
-	}
-
-	const item = JSON.parse(itemStr)
-	const now = new Date()
-	if (now.getTime() > item.expiry) {
-		localStorage.removeItem(key)
-		return []
-	}
-
-	return item.value
-}
-
 function setData(this: any) {
   chartData.value = ({
     labels: ["label"],
@@ -101,26 +73,17 @@ function updateCanvasWidth() {
 }
 
 const fetchStats = async () => {
-  var stats = getWithExpiry(STATS_KEY);
-  if (stats.length == 0) {
-    try {
-      await Promise.all(tierData.value.map(async tier => {
-        const result = await axios.get<IssueSearch>(
-          `${import.meta.env.VITE_LABEL_SEARCH_URL}+label:${tier.labelName}`
-        );
+  try {
+    const result = await axios.get<{[key: string]: number}>(
+      import.meta.env.VITE_STATS_URL
+    );
 
-        tier.count = result.data.total_count;
-      }));
-
-      setWithExpiry(STATS_KEY, tierData.value, 10);
-      setData();
-    } catch (err) {
-      console.error(err);
-    }
-  } else {
-    tierData.value = stats;
-
+    tierData.value.map(tier => {
+      tier.count = result.data[tier.labelName];
+    });
     setData();
+  } catch (err) {
+    console.error(err);
   }
 }
 
@@ -195,7 +158,7 @@ const chartOptions = ref<ChartOptions<'bar'>>({
 
 window.addEventListener('resize', updateCanvasWidth);
 Chart.register(CategoryScale, LinearScale, BarElement, Title, Legend, Tooltip, Colors);
-Tooltip.positioners.cursor = function(elements, eventPosition) {
+Tooltip.positioners.cursor = function (elements, eventPosition) {
   return {
     x: eventPosition.x,
     y: eventPosition.y
@@ -212,9 +175,7 @@ onMounted(() => {
   <div class="space-y-16 container xl:max-w-7xl mx-auto px-4 py-16 lg:px-8 lg:py-32">
     <div class="text-center">
       <div class="flex-none relative">
-        <div
-          class="pattern-dots-xl opacity-10 absolute top-0 left-0 w-48 h-64 md:mt-20 transform"
-        ></div>
+        <div class="pattern-dots-xl opacity-10 absolute top-0 left-0 w-64 h-48 md:mt-0 md:ml-0 transform"></div>
       </div>
       <div class="text-sm uppercase font-bold tracking-wider mb-1 text-blue-700">
         {{ t("views.compatibility.subtitle") }}
@@ -229,21 +190,24 @@ onMounted(() => {
 
     <div class="container flex justify-center">
       <div class="relative lg:h-1/3" lg:w-1vw>
-        <Bar id="chart" ref="chart" :data="chartData" :options="chartOptions"/>
+        <Bar id="chart" ref="chart" :data="chartData" :options="chartOptions" />
       </div>
     </div>
   </div>
 
   <div class="bg-white">
     <div class="space-y-16 container xl:max-w-7xl mx-auto px-4 py-16 lg:px-8 lg:py-32">
-      <div class="text-center">
-          <h2 class="text-3xl md:text-4xl font-extrabold mb-4">
-            {{t("views.compatibility.title2")}}
-          </h2>
-          <h3 class="text-lg md:text-xl md:leading-relaxed font-medium text-gray-600 lg:w-2/3 mx-auto">
-            {{t("views.compatibility.description2")}}
-          </h3>
-        </div>
+      <div class="text-center space-y-4">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">
+          {{ t("views.compatibility.title2") }}
+        </h2>
+        <h3 class="text-lg md:text-xl md:leading-relaxed font-medium text-gray-600 lg:w-2/3 mx-auto">
+          {{ t("views.compatibility.description2") }}
+        </h3>
+        <GButton href="https://github.com/Ryujinx/Ryujinx-Games-List/issues" rounded variant="sky" size="elg">
+          {{ t("views.compatibility.button") }}
+        </GButton>
+      </div>
     </div>
   </div>
 </template>

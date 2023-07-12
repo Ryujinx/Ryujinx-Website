@@ -34,10 +34,6 @@ export type DownloadAsset = {
   url: string;
 }
 
-export type IssueSearch = {
-  total_count: number;
-}
-
 export type Repo = {
   stargazers_count: number;
 }
