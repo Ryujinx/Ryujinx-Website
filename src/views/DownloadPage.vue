@@ -49,7 +49,7 @@ const fetchBuilds = async () => {
           linuxBuildUrl.value = asset.browser_download_url;
         } 
       } else if (asset.name.startsWith("test-ava-ryujinx")) {
-        if (asset.name.endsWith(".app.tar.gz")) {
+        if (asset.name.endsWith("macos_universal.app.tar.gz")) {
           macosBuildUrl.value = asset.browser_download_url;
         }
       }
