@@ -3,7 +3,7 @@ import axios from "axios";
 import { onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { Bar } from "vue-chartjs";
-import { Chart, CategoryScale, LinearScale, BarElement, Title, Legend, Tooltip, Colors, ChartData, ChartOptions } from 'chart.js'
+import { Chart, CategoryScale, LinearScale, BarElement, Title, Legend, Tooltip, Colors, ChartData, ChartOptions } from "chart.js"
 import { ChartDataset } from "chart.js";
 
 const { t } = useI18n();
