@@ -55,7 +55,7 @@ interface PlayableTier {
 function setData(this: any) {
   chartData.value = ({
     labels: ["label"],
-    datasets: tierData.value.map((tier: PlayableTier): ChartDataset<'bar', number[]> => ({
+    datasets: tierData.value.map((tier: PlayableTier): ChartDataset<"bar", number[]> => ({
       data: [tier.count],
       label: t(`views.compatibility.${tier.localeKey}`),
       backgroundColor: tier.color
@@ -64,11 +64,11 @@ function setData(this: any) {
 }
 
 function updateCanvasWidth() {
-  var canvas = document.getElementById('chart');
+  var canvas = document.getElementById("chart");
   var screenWidth = window.innerWidth;
   var canvasWidth = screenWidth * 0.6;
   if (canvas) {
-    canvas.style.width = canvasWidth + 'px';
+    canvas.style.width = canvasWidth + "px";
   }
 }
 
@@ -87,12 +87,12 @@ const fetchStats = async () => {
   }
 }
 
-const chartData = ref<ChartData<'bar'>>({
+const chartData = ref<ChartData<"bar">>({
   labels: [],
   datasets: []
 });
 
-const chartOptions = ref<ChartOptions<'bar'>>({
+const chartOptions = ref<ChartOptions<"bar">>({
   indexAxis: "y" as const,
   responsive: true,
   maintainAspectRatio: false,
@@ -156,7 +156,7 @@ const chartOptions = ref<ChartOptions<'bar'>>({
   }
 });
 
-window.addEventListener('resize', updateCanvasWidth);
+window.addEventListener("resize", updateCanvasWidth);
 Chart.register(CategoryScale, LinearScale, BarElement, Title, Legend, Tooltip, Colors);
 Tooltip.positioners.cursor = function (elements, eventPosition) {
   return {
