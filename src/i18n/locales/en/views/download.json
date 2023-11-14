@@ -8,7 +8,7 @@
   "supportPlanned": "Support planned",
   "supportWindows": "For Windows 10 & 11",
   "supportLinux": "For the most common Linux distros",
-  "supportMacOS": "For macOS 11 and later (Intel and Apple Silicon)",
+  "supportMacOS": "For macOS 12 and later (Intel and Apple Silicon)",
   "buildInformation": "Build information",
   "buildRelease": "This build was released on {0}",
   "assets": "assets",
