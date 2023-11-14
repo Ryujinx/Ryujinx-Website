@@ -29,13 +29,14 @@ The complete list of changes is available [here](CHANGELOG.md)
 
 Currently, we need you to help us translate the website.
 Future languages to be added:
-- French
 - German
 - Dutch
 - Portuguese
 - Spanish
+- Any other language
 
 Follow this link to participate in the translation (via Crowdin): https://crwd.in/ryujinx-website-ryujinxorg
+If the language you want to translate does not appear. Contact us on Discord
 
 ### Development
 

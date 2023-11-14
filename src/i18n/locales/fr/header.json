@@ -1,0 +1,8 @@
+{
+  "title1": "Un émulateur simple et expérimental pour {0}",
+  "title2": "Nintendo Switch",
+  "description": "Ryujinx est un émulateur open source Nintendo Switch créé par {0} et écrit en C#. Il a pour but d'être précis et performant tout en ayant une interface conviviale et des versions régulières.",
+  "author": "gdkchan",
+  "getStarted": "Démarrer",
+  "contribute": "Contribuer"
+}

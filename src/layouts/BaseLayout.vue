@@ -13,7 +13,7 @@ const { currentRoute } = useRouter();
     class="flex flex-col mx-auto w-full min-h-screen bg-gray-100"
   >
     <main id="page-content" class="flex flex-auto flex-col max-w-full">
-      <div class="bg-gray-800 overflow-hidden">
+      <div class="bg-gray-800">
         <BaseHeader />
       </div>
 

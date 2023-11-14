@@ -1,0 +1,12 @@
+{
+  "title1": "Aidez-nous à créer le {0}",
+  "title2": "meilleur émulateur pour switch",
+  "subTitle": "Créée par une équipe passionnée, Ryujinx est en développement actif et toute aide est appréciée pour la maintenir.",
+  "titleContribute": " Comment puis-je contribuer ?",
+  "areaDevTitle": "Aider au Développement",
+  "areaDevDescription": "Si vous avez de l'expérience avec le C#, les Homebrew Switch, le design graphique, l'assurance qualité logicielle ou le test logiciel, la gestion de serveur Discord ou n'importe quelle autre compétence que vous pensez utiles pour le projet Ryujinx, veuillez nous contacter sur notre serveur Discord.",
+  "joinDiscord": "Rejoignez notre Discord",
+  "becomePatron": "Devenez un Patron",
+  "areaDonationTitle": "Aider grâce aux dons",
+  "areaDonationDescription": "Si vous ne pouvez pas aider avec le développement, il y a d'autres moyens de nous soutenir. Bien que les dons monétaires ne soient en aucun cas nécessaire, nous les apprécions. Ces dons financeront l\"équipements nécessaire au développement de l'émulateur. En retour, il y certaines récompenses que vous recevrez en tant que supporter (comme par exemple l'accès à un canal réservé sur notre Discord)."
+}

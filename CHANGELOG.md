@@ -1,5 +1,12 @@
 # Release Notes
 
+## v3.2.0 (15/09/2022)
+
+### Features
+
+- Add French language support
+- Add language selector
+
 ## v3.1.0 (09/09/2022)
 
 ### Features

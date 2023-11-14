@@ -125,9 +125,14 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
                   <h4 class="text-lg font-bold mb-2">
                     {{ t("views.homepage.compatibility") }}
                   </h4>
-                  <p class="leading-relaxed text-gray-600">
-                    {{ t("views.homepage.compatibilityDescription") }}
-                  </p>
+                  <i18n-t
+                    keypath="views.homepage.compatibilityDescription"
+                    tag="p"
+                    class="leading-relaxed text-gray-600"
+                  >
+                    <template v-slot:number_titles>3 600</template>
+                    <template v-slot:number_playable>2 700</template>
+                  </i18n-t>
                 </div>
                 <div
                   class="group bg-white p-5 transition ease-out duration-200 border-2 border-gray-200 rounded-2xl hover:border-sky-300"
@@ -188,7 +193,7 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
               tag="h3"
               class="text-lg md:text-xl md:leading-relaxed font-medium text-gray-200 lg:w-2/3 mx-auto"
             >
-              <span class="italic">{{t("views.homepage.spelled")}}</span>
+              <span class="italic">{{ t("views.homepage.spelled") }}</span>
             </i18n-t>
           </div>
         </div>

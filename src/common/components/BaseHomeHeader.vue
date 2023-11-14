@@ -3,6 +3,7 @@ import { useI18n } from "vue-i18n";
 
 import BaseNavigation from "@/common/components/navigations/BaseNavigation.vue";
 import SocialIconList from "@/modules/SocialIconList.vue";
+import LanguageSelector from "@/modules/LanguageSelector.vue";
 import { navigations } from "@/common/constants/navigation";
 
 const { t } = useI18n();
@@ -15,7 +16,7 @@ const { t } = useI18n();
   >
     <div class="bg-gray-800 bg-opacity-90 backdrop-filter">
       <!-- Header -->
-      <header id="page-header" class="flex flex-none items-center py-10">
+      <header id="page-header" class="flex flex-none items-center py-10 z-1">
         <div
           class="flex flex-col text-center md:flex-row md:items-center md:justify-between space-y-6 md:space-y-0 container xl:max-w-7xl mx-auto px-4 lg:px-10"
         >
@@ -40,6 +41,8 @@ const { t } = useI18n();
             <div class="flex items-center justify-center space-x-3">
               <SocialIconList />
             </div>
+
+            <LanguageSelector />
           </div>
         </div>
       </header>
@@ -52,14 +55,14 @@ const { t } = useI18n();
           tag="h1"
           class="text-3xl md:text-4xl font-extrabold mb-4 text-white"
         >
-          <span class="text-red-500">{{ t("header.title2") }}</span>
+          <span class="text-red-500">Nintendo Switch</span>
         </i18n-t>
         <i18n-t
           keypath="header.description"
           tag="h2"
           class="text-lg md:text-xl md:leading-relaxed font-medium text-gray-400 lg:w-2/3 mx-auto"
         >
-          <span class="text-red-50">{{ t("header.author") }}</span>
+          <span class="text-red-50">gdkchan</span>
         </i18n-t>
         <div
           class="flex flex-col sm:flex-row sm:items-center sm:justify-center space-y-2 sm:space-y-0 sm:space-x-2 pt-10 pb-16"

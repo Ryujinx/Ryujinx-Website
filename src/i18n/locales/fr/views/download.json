@@ -1,0 +1,22 @@
+{
+  "title1": "Dernier {0}",
+  "title2": "Téléchargement",
+  "subTitle": "N'oubliez pas de consulter {0} après l'installation",
+  "startupGuide": "le guide de démarrage",
+  "download": "Télécharger",
+  "notSupported": "Actuellement non supporté",
+  "supportPlanned": "Support prévu",
+  "supportWindows": "Pour Windows 10 & 11",
+  "supportLinux": "Pour les distributions Linux les plus courantes",
+  "buildInformation": "Information sur la version",
+  "buildRelease": "Cette version a été publiée le {0}",
+  "assets": "ressources",
+  "downloads": "téléchargements",
+  "tag": "Étiquette",
+  "manualDownload": "Téléchargement manuel",
+  "olderBuilds": "Anciennes versions",
+  "ldnBuildTitle": "Vous recherchez la {0} ?",
+  "ldnBuild": "version LDN",
+  "ldnBuildDescription": "Rendez-vous sur notre Patreon pour plus d'informations avec le lien de téléchargement gratuit",
+  "learnMore": "En savoir plus"
+}
