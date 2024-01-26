@@ -35,7 +35,7 @@ Future languages to be added:
 - Portuguese
 - Spanish
 
-Follow this link to participate in the translation (via Crowdin): https://crwd.in/ryujinx-website-ryujinxorg
+Follow this link to participate in the translation (via Crowdin): <https://crowdin.com/project/ryujinx-website-ryujinxorg>
 
 ### Development
 
