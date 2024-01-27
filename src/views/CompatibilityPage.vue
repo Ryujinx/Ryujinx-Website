@@ -57,7 +57,7 @@ function setData(this: any) {
     labels: ["label"],
     datasets: tierData.value.map((tier: PlayableTier): ChartDataset<"bar", number[]> => ({
       data: [tier.count],
-      label: t(`views.compatibility.${tier.localeKey}`),
+      label: t("views.compatibility.${tier.localeKey}"),
       backgroundColor: tier.color
     })).reverse(),
   })
