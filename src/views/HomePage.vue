@@ -8,9 +8,60 @@ import {
 import { useI18n } from "vue-i18n";
 
 import TeamList from "@/modules/TeamList.vue";
+import { computed, onMounted, ref } from "vue";
+import axios from "axios";
+import { Repo } from "@/types";
 
 const { t } = useI18n();
 const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
+const issueSearch = ref<{[key: string]: number}>({});
+const repo = ref<Repo>({} as Repo);
+const playableGames = computed(() => {
+  return formatNumber(issueSearch.value["status-playable"]);
+});
+const stars = computed(() => {
+  return formatNumber(repo.value?.stargazers_count);
+});
+
+onMounted(() => {
+  fetchStats();
+});
+
+function formatNumber(num: number): string {
+  return new Intl.NumberFormat(getLang(), {
+    notation: "compact",
+    maximumFractionDigits: 1
+  }).format(num);
+}
+
+function getLang() {
+  if (navigator.languages != undefined) 
+    return navigator.languages[0]; 
+  return navigator.language;
+}
+
+const fetchStats = async () => {
+  try {
+    const result = await axios.get<{[key: string]: number}>(
+      import.meta.env.VITE_STATS_URL
+    );
+
+    issueSearch.value = result.data;
+  } catch (err) {
+    console.error(err);
+  }
+
+  try {
+    const result = await axios.get<Repo>(
+      import.meta.env.VITE_REPO_URL
+    );
+
+    repo.value = result.data;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 </script>
 <template>
   <div>
@@ -230,7 +281,7 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
             <dl
               class="space-y-1 px-5 py-12 hover:bg-gray-50 hover:bg-opacity-50"
             >
-              <dt class="text-4xl font-extrabold text-sky-600">14,9k+</dt>
+              <dt class="text-4xl font-extrabold text-sky-600">{{stars}}+</dt>
               <dd class="text-sm uppercase tracking-wide font-semibold">
                 {{ t("views.homepage.githubStar") }}
               </dd>
@@ -238,7 +289,7 @@ const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
             <dl
               class="space-y-1 px-5 py-12 hover:bg-gray-50 hover:bg-opacity-50"
             >
-              <dt class="text-4xl font-extrabold text-sky-600">3,2k+</dt>
+              <dt class="text-4xl font-extrabold text-sky-600">{{playableGames}}+</dt>
               <dd class="text-sm uppercase tracking-wide font-semibold">
                 {{ t("views.homepage.playableGames") }}
               </dd>

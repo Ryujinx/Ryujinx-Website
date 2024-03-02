@@ -1,0 +1,13 @@
+{
+    "title": "Play Anything",
+    "subtitle": "Compatibility",
+    "description": "Ryujinx can play thousands of games perfectly. From Breath of the Wild to Xenoblade, it just works, and the list is constantly expanding.",
+    "playable": "Playable",
+    "ingame": "In-Game",
+    "menus": "Menus",
+    "boots": "Boots",
+    "nothing": "Nothing",
+    "title2": "See the Full List",
+    "description2": "Browse the compatibility list on GitHub to see if your favourite game is supported.",
+    "button": "Compatibility List"
+}

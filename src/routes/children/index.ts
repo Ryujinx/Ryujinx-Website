@@ -1,6 +1,7 @@
 const HomePage = () => import("@/views/HomePage.vue");
 const DownloadPage = () => import("@/views/DownloadPage.vue");
 const ContributePage = () => import("@/views/ContributePage.vue");
+const CompatibilityPage = () => import("@/views/CompatibilityPage.vue");
 
 export default [
   {
@@ -12,5 +13,10 @@ export default [
     path: "contribute",
     name: "contribute",
     component: ContributePage,
+  },
+  {
+    path: "compatibility",
+    name: "compatibility",
+    component: CompatibilityPage,
   },
 ];

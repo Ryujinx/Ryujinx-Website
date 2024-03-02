@@ -22,6 +22,6 @@ export const navigations: NavigationNode[] = [
   },
   {
     name : i18n.global.t("navigations.compatibility"),
-    href: import.meta.env.VITE_COMPATIBILITY_URL
+    to: "compatibility"
   }
 ];
