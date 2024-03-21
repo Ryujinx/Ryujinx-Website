@@ -10,7 +10,6 @@ import {
 } from "@heroicons/vue/solid";
 
 import { DownloadAsset, DownloadRelease } from "@/types";
-import { assert } from "console";
 
 const GUIDE_URL = import.meta.env.VITE_GUIDE_URL as string;
 const LDN_BUILD_URL = import.meta.env.VITE_LDN_BUILD_URL as string;
@@ -40,12 +39,8 @@ onMounted(() => {
 });
 
 const totalDownload = computed(() => {
-  return downloadReleases.value?.reduce(
-    (sumTotal, release: DownloadRelease) => {
-      const total = release.assets.reduce((total, asset: DownloadAsset) => total + asset.download_count, 0);
-
-      return sumTotal + total;
-    }, 0) ?? 0;
+  return downloadReleases.value[0]
+          .assets.reduce((total, asset: DownloadAsset) => total + asset.download_count, 0)
 });
 
 const fetchBuilds = async () => {
