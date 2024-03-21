@@ -40,7 +40,7 @@ onMounted(() => {
 
 const totalDownload = computed(() => {
   return downloadReleases.value[0]
-          .assets.reduce((total, asset: DownloadAsset) => total + asset.download_count, 0)
+          .assets.reduce((total, asset) => total + asset.download_count, 0)
 });
 
 const fetchBuilds = async () => {
