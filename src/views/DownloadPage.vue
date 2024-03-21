@@ -9,51 +9,71 @@ import {
   InformationCircleIcon,
 } from "@heroicons/vue/solid";
 
-import { DownloadRelease } from "@/types";
+import { DownloadAsset, DownloadRelease } from "@/types";
+import { assert } from "console";
 
 const GUIDE_URL = import.meta.env.VITE_GUIDE_URL as string;
 const LDN_BUILD_URL = import.meta.env.VITE_LDN_BUILD_URL as string;
 const OLDER_BUILD_URL = import.meta.env.VITE_OLDER_BUILDS_URL as string;
 const { t } = useI18n();
 const isLoading = ref(true);
-const downloadRelease = ref<DownloadRelease>({} as DownloadRelease);
-const macosBuildUrl = ref("");
-const linuxIntelBuildUrl = ref("");
-const linuxArm64BuildUrl = ref("");
-const windowBuildUrl = ref("");
+
+type Release = {
+  release: DownloadRelease;
+  asset: DownloadAsset;
+};
+
+const releaseMap = {
+  "win-x64": /win_x64\.zip/,
+  "lin-x64": /linux_x64\.tar\.gz/,
+  "lin-arm64": /linux_arm64\.tar\.gz/,
+  "macos": /macos_universal\.app\.tar\.gz/
+}
+
+type ReleaseTargets = keyof typeof releaseMap;
+
+const downloadReleases = ref<DownloadRelease[]>([]);
+const releases = ref<{ [K in ReleaseTargets]?: Release }>({});
 
 onMounted(() => {
   fetchBuilds();
 });
 
 const totalDownload = computed(() => {
-  let total = 0;
+  return downloadReleases.value?.reduce(
+    (sumTotal, release: DownloadRelease) => {
+      const total = release.assets.reduce((total, asset: DownloadAsset) => total + asset.download_count, 0);
 
-  downloadRelease.value?.assets.forEach((a) => (total += a.download_count));
-
-  return total;
+      return sumTotal + total;
+    }, 0) ?? 0;
 });
 
 const fetchBuilds = async () => {
   try {
-    const result = await axios.get<DownloadRelease>(
+    const result = await axios.get<DownloadRelease[]>(
       import.meta.env.VITE_RELEASE_URL
     );
 
-    downloadRelease.value = result.data;
+    downloadReleases.value = result.data;
 
-    downloadRelease.value?.assets.forEach((asset) => {
-      if (asset.name.startsWith("ryujinx")) {
-        if (asset.name.endsWith("win_x64.zip")) {
-          windowBuildUrl.value = asset.browser_download_url;
-        } else if (asset.name.endsWith("linux_x64.tar.gz")) {
-          linuxIntelBuildUrl.value = asset.browser_download_url;
-        } else if (asset.name.endsWith("linux_arm64.tar.gz")) {
-          linuxArm64BuildUrl.value = asset.browser_download_url;
-        } else if (asset.name.endsWith("macos_universal.app.tar.gz")) {
-          macosBuildUrl.value = asset.browser_download_url;
+    const targets = Object.keys(releaseMap) as Array<ReleaseTargets>;
+    result.data.forEach(release => {
+      targets.forEach(target => {
+        if(releases.value[target]) {
+          return;
         }
-      }
+
+        const asset = release.assets
+          .filter(asset => asset.name.startsWith("ryujinx"))
+          .find(asset => asset.name.match(releaseMap[target]));
+
+        if(asset) {
+          releases.value[target] = {
+            release,
+            asset
+          };
+        }
+      });
     });
   } catch (err) {
     console.error(err);
@@ -85,14 +105,14 @@ const fetchBuilds = async () => {
         <!-- Features -->
         <div v-if="!isLoading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           <!-- Windows -->
-          <a :href="windowBuildUrl"
+          <a v-if="releases['win-x64']" :href="releases['win-x64']!.asset.browser_download_url"
             class="group relative p-4 lg:p-6 bg-white rounded-xl transition duration-150 shadow-md shadow-gray-100">
             <div
               class="absolute inset-0 bg-white rounded-xl shadow-md shadow-gray-200 transition duration-100 scale-100 opacity-0 group-hover:opacity-100 group-hover:scale-105 group-active:scale-100 group-active:opacity-0">
             </div>
             <div class="relative text-center">
               <div class="text-xs uppercase text-gray-400 font-semibold tracking-wider mb-4">
-                {{ downloadRelease.tag_name }}
+                {{ releases['win-x64']!.release.tag_name }}
               </div>
               <div class="relative w-12 mb-8 text-indigo-500 mx-auto">
                 <img alt="windows logo" src="/assets/images/icons/windows.png" />
@@ -109,14 +129,14 @@ const fetchBuilds = async () => {
           </a>
 
           <!-- Mac OS -->
-          <a :href="macosBuildUrl"
+          <a v-if="releases['macos']" :href="releases['macos']!.asset.browser_download_url"
             class="group relative p-4 lg:p-6 bg-white rounded-xl transition duration-150 shadow-md shadow-gray-100">
             <div
               class="absolute inset-0 bg-white rounded-xl shadow-md shadow-gray-200 transition duration-100 scale-100 opacity-0 group-hover:opacity-100 group-hover:scale-105 group-active:scale-100 group-active:opacity-0">
             </div>
             <div class="relative text-center">
               <div class="text-xs uppercase text-gray-400 font-semibold tracking-wider mb-4">
-                {{ downloadRelease.tag_name }}
+                {{ releases['macos']!.release.tag_name }}
               </div>
               <div class="relative w-12 mb-8 text-indigo-500 mx-auto">
                 <img alt="macos logo" src="/assets/images/icons/macos.png" />
@@ -133,14 +153,14 @@ const fetchBuilds = async () => {
           </a>
 
           <!-- Linux x86_64 -->
-          <a :href="linuxIntelBuildUrl"
+          <a v-if="releases['lin-x64']" :href="releases['lin-x64']!.asset.browser_download_url"
             class="group relative p-4 lg:p-6 bg-white rounded-xl transition duration-150 shadow-md shadow-gray-100">
             <div
               class="absolute inset-0 bg-white rounded-xl shadow-md shadow-gray-200 transition duration-100 scale-100 opacity-0 group-hover:opacity-100 group-hover:scale-105 group-active:scale-100 group-active:opacity-0">
             </div>
             <div class="relative text-center">
               <div class="text-xs uppercase text-gray-400 font-semibold tracking-wider mb-4">
-                {{ downloadRelease.tag_name }}
+                {{ releases['lin-x64']!.release.tag_name }}
               </div>
               <div class="relative w-12 mb-8 text-indigo-500 mx-auto">
                 <img alt="linux logo" src="/assets/images/icons/linux.png" />
@@ -157,14 +177,14 @@ const fetchBuilds = async () => {
           </a>
 
           <!-- Linux arm64 -->
-          <a :href="linuxArm64BuildUrl"
+          <a v-if="releases['lin-arm64']" :href="releases['lin-arm64']!.asset.browser_download_url"
             class="group relative p-4 lg:p-6 bg-white rounded-xl transition duration-150 shadow-md shadow-gray-100">
             <div
               class="absolute inset-0 bg-white rounded-xl shadow-md shadow-gray-200 transition duration-100 scale-100 opacity-0 group-hover:opacity-100 group-hover:scale-105 group-active:scale-100 group-active:opacity-0">
             </div>
             <div class="relative text-center">
               <div class="text-xs uppercase text-gray-400 font-semibold tracking-wider mb-4">
-                {{ downloadRelease.tag_name }}
+                {{ releases["lin-arm64"]!.release.tag_name }}
               </div>
               <div class="relative w-12 mb-8 text-indigo-500 mx-auto">
                 <img alt="linux logo" src="/assets/images/icons/linux.png" />
@@ -221,7 +241,7 @@ const fetchBuilds = async () => {
             </h4>
             <i18n-t class="leading-relaxed text-gray-500 mb-5" keypath="views.download.buildRelease" tag="p">
               <span class="font-semibold">
-                {{ dayjs(downloadRelease.published_at).format("YYYY-MM-DD") }}
+                {{ dayjs(downloadReleases[0].published_at).format("YYYY-MM-DD") }}
               </span>
             </i18n-t>
             <h5 class="flex items-center my-8">
@@ -239,7 +259,7 @@ const fetchBuilds = async () => {
                   <CogIcon class="text-sky-500 inline-block w-5 h-5" />
                   <span>
                     <span class="font-bold uppercase">
-                      {{ downloadRelease.assets.length }}
+                      {{ downloadReleases[0].assets.length }}
                     </span>
                     {{ t("views.download.assets") }}
                   </span>
@@ -250,7 +270,7 @@ const fetchBuilds = async () => {
                   <CogIcon class="text-sky-500 inline-block w-5 h-5" />
                   <span>
                     {{ t("views.download.tag") }}:
-                    <strong>{{ downloadRelease.tag_name }}</strong>
+                    <strong>{{ downloadReleases[0].tag_name }}</strong>
                   </span>
                 </li>
               </ul>
@@ -265,7 +285,7 @@ const fetchBuilds = async () => {
                 </li>
               </ul>
               <div>
-                <GButton :href="downloadRelease.html_url" rounded variant="sky" size="lg" extra-class="space-x-2 w-full">
+                <GButton :href="downloadReleases[0].html_url" rounded variant="sky" size="lg" extra-class="space-x-2 w-full">
                   <template #icon>
                     <ExternalLinkIcon class="opacity-50 inline-block w-5 h-5" />
                   </template>
@@ -286,13 +306,13 @@ const fetchBuilds = async () => {
           <!-- Author info -->
           <div class="flex-none relative md:w-72 p-5">
             <div class="p-5 lg:p-6 text-center rounded-lg bg-sky-50">
-              <a :href="downloadRelease.author.html_url">
+              <a :href="downloadReleases[0].author.html_url">
                 <div>
-                  <img :src="downloadRelease.author.avatar_url" alt="Author avatar" class="w-16 h-16 inline-block" />
+                  <img :src="downloadReleases[0].author.avatar_url" alt="Author avatar" class="w-16 h-16 inline-block" />
                 </div>
                 <div
                   class="inline-flex space-x-1 items-center text-xs uppercase tracking-wider font-semibold px-3 py-1 bg-indigo-200 bg-opacity-50 text-sky-600 rounded-full mb-4">
-                  <span>{{ downloadRelease.author.login }}</span>
+                  <span>{{ downloadReleases[0].author.login }}</span>
                 </div>
               </a>
             </div>
